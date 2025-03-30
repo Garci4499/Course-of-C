@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="Workspace2" Database="" Version="10000">
+  <Project Name="SecondChallenge" Path="SecondChallenge/SecondChallenge.project" Active="No"/>
+  <Project Name="OurFirstProgram" Path="OurFirstProgram/OurFirstProgram.project" Active="No"/>
+  <Project Name="ThirdChallenge" Path="ThirdChallenge/ThirdChallenge.project" Active="No"/>
+  <Project Name="ForthChallenge_TimeChange" Path="ForthChallenge_TimeChange/ForthChallenge_TimeChange.project" Active="No"/>
+  <Project Name="FifthChallenge_PrintSize" Path="FifthChallenge_PrintSize/FifthChallenge_PrintSize.project" Active="No"/>
+  <Project Name="Prueba" Path="Prueba/Prueba.project" Active="Yes"/>
+  <Project Name="SixthChallenge_Amount2Pay" Path="SixthChallenge_Amount2Pay/SixthChallenge_Amount2Pay.project" Active="No"/>
+  <Project Name="SeventhChallenge_GuessNumber" Path="SeventhChallenge_GuessNumber/SeventhChallenge_GuessNumber.project" Active="No"/>
+  <Project Name="EighthChallenge_PrimeNumbers" Path="EighthChallenge_PrimeNumbers/EighthChallenge_PrimeNumbers.project" Active="No"/>
+  <Project Name="NinthChallenge_Weather" Path="NinthChallenge_Weather/NinthChallenge_Weather.project" Active="No"/>
+  <Project Name="TenthChallenge_WriteFunctions" Path="TenthChallenge_WriteFunctions/TenthChallenge_WriteFunctions.project" Active="No"/>
+  <Project Name="TicTacToe" Path="TicTacToe/TicTacToe.project" Active="No"/>
+  <Project Name="CharArrays" Path="CharArrays/CharArrays.project" Active="No"/>
+  <Project Name="StringFunctions" Path="StringFunctions/StringFunctions.project" Active="No"/>
+  <Project Name="DebuggerTest" Path="DebuggerTest/DebuggerTest.project" Active="No"/>
+  <Project Name="PointerBasics" Path="PointerBasics/PointerBasics.project" Active="No"/>
+  <Project Name="PassbyReference" Path="PassbyReference/PassbyReference.project" Active="No"/>
+  <Project Name="CountingCharinString" Path="CountingCharinString/CountingCharinString.project" Active="No"/>
+  <Project Name="memoryAllocation" Path="memoryAllocation/memoryAllocation.project" Active="No"/>
+  <Project Name="Structures" Path="Structures/Structures.project" Active="No"/>
+  <Project Name="readLine" Path="readLine/readLine.project" Active="No"/>
+  <Project Name="covertFile" Path="covertFile/covertFile.project" Active="No"/>
+  <Project Name="reverseFile" Path="reverseFile/reverseFile.project" Active="No"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug">
+      <Environment/>
+      <Project Name="OurFirstProgram" ConfigName="Debug"/>
+      <Project Name="Firstchallenge" ConfigName="Debug"/>
+      <Project Name="SecondChallenge" ConfigName="Debug"/>
+      <Project Name="ThirdChallenge" ConfigName="Debug"/>
+      <Project Name="ForthChallenge_TimeChange" ConfigName="Debug"/>
+      <Project Name="FifthChallenge_PrintSize" ConfigName="Debug"/>
+      <Project Name="Prueba" ConfigName="Debug"/>
+      <Project Name="SixthChallenge_Amount2Pay" ConfigName="Debug"/>
+      <Project Name="SeventhChallenge_GuessNumber" ConfigName="Debug"/>
+      <Project Name="EighthChallenge_PrimeNumbers" ConfigName="Debug"/>
+      <Project Name="NinthChallenge_Weather" ConfigName="Debug"/>
+      <Project Name="TenthChallenge_WriteFunctions" ConfigName="Debug"/>
+      <Project Name="TicTacToe" ConfigName="Debug"/>
+      <Project Name="CharArrays" ConfigName="Debug"/>
+      <Project Name="StringFunctions" ConfigName="Debug"/>
+      <Project Name="DebuggerTest" ConfigName="Debug"/>
+      <Project Name="PointerBasics" ConfigName="Debug"/>
+      <Project Name="PassbyReference" ConfigName="Debug"/>
+      <Project Name="CountingCharinString" ConfigName="Debug"/>
+      <Project Name="memoryAllocation" ConfigName="Debug"/>
+      <Project Name="Structures" ConfigName="Debug"/>
+      <Project Name="readLine" ConfigName="Debug"/>
+      <Project Name="covertFile" ConfigName="Debug"/>
+      <Project Name="reverseFile" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release">
+      <Environment/>
+      <Project Name="OurFirstProgram" ConfigName="Release"/>
+      <Project Name="Firstchallenge" ConfigName="Release"/>
+      <Project Name="SecondChallenge" ConfigName="Release"/>
+      <Project Name="ThirdChallenge" ConfigName="Release"/>
+      <Project Name="ForthChallenge_TimeChange" ConfigName="Release"/>
+      <Project Name="FifthChallenge_PrintSize" ConfigName="Release"/>
+      <Project Name="Prueba" ConfigName="Release"/>
+      <Project Name="SixthChallenge_Amount2Pay" ConfigName="Release"/>
+      <Project Name="SeventhChallenge_GuessNumber" ConfigName="Release"/>
+      <Project Name="EighthChallenge_PrimeNumbers" ConfigName="Release"/>
+      <Project Name="NinthChallenge_Weather" ConfigName="Release"/>
+      <Project Name="TenthChallenge_WriteFunctions" ConfigName="Release"/>
+      <Project Name="TicTacToe" ConfigName="Release"/>
+      <Project Name="CharArrays" ConfigName="Release"/>
+      <Project Name="StringFunctions" ConfigName="Release"/>
+      <Project Name="DebuggerTest" ConfigName="Release"/>
+      <Project Name="PointerBasics" ConfigName="Release"/>
+      <Project Name="PassbyReference" ConfigName="Release"/>
+      <Project Name="CountingCharinString" ConfigName="Release"/>
+      <Project Name="memoryAllocation" ConfigName="Release"/>
+      <Project Name="Structures" ConfigName="Release"/>
+      <Project Name="readLine" ConfigName="Release"/>
+      <Project Name="covertFile" ConfigName="Release"/>
+      <Project Name="reverseFile" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

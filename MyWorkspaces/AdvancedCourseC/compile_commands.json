@@ -1,0 +1,45 @@
+[{
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\FlexibleArrays\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\FlexibleArrays",
+  "command": "gcc -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\FlexibleArrays\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\FlexibleArrays\\main.c.o -target x86_64-w64-mingw32 -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\VLAs\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\VLAs",
+  "command": "gcc -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\VLAs\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\VLAs\\main.c.o -target x86_64-w64-mingw32 -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\ComplexNumbers\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\ComplexNumbers",
+  "command": "C:/msys64/mingw64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\ComplexNumbers\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\ComplexNumbers\\main.c.o -target x86_64-w64-mingw32 -IC:\\msys64\\mingw64\\include\\c++\\14.2.0 -IC:\\msys64\\mingw64\\include\\c++\\14.2.0\\x86_64-w64-mingw32 -IC:\\msys64\\mingw64\\include\\c++\\14.2.0\\backward -IC:\\msys64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\14.2.0\\include -IC:\\msys64\\mingw64\\include -IC:\\msys64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\14.2.0\\include-fixed -IC:\\msys64\\mingw64\\bin\\mingw64\\include -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class",
+  "command": "gcc -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\main.c.o -target x86_64-w64-mingw32 -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge2_solution.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class",
+  "command": "gcc -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge2_solution.c -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge2_solution.c.o -target x86_64-w64-mingw32 -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge3_solution_file1.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class",
+  "command": "gcc -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge3_solution_file1.c -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge3_solution_file1.c.o -target x86_64-w64-mingw32 -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge1_solution.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class",
+  "command": "gcc -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge1_solution.c -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge1_solution.c.o -target x86_64-w64-mingw32 -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge3_solution_file2.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class",
+  "command": "gcc -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge3_solution_file2.c -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\Storage_class\\Challenge3_solution_file2.c.o -target x86_64-w64-mingw32 -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest",
+  "command": "gcc -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest\\main.c.o -target x86_64-w64-mingw32 -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest\\other.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest",
+  "command": "gcc -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest\\other.c -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest\\other.c.o -target x86_64-w64-mingw32 -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest\\other.h",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest",
+  "command": "g++ -c C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest\\other.h -o C:\\Users\\trcagj\\MyWorkspaces\\AdvancedCourseC\\modularProjTest\\other.h.o -target x86_64-w64-mingw32 -I. -I.  -gdwarf-2  -O0  -Wall"
+ }]

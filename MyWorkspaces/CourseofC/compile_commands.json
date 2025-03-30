@@ -1,0 +1,93 @@
+[{
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\reverseFile\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\reverseFile",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\reverseFile\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\reverseFile\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\Structures\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\Structures",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\Structures\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\Structures\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\PassbyReference\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\PassbyReference",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\PassbyReference\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\PassbyReference\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\DebuggerTest\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\DebuggerTest",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\DebuggerTest\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\DebuggerTest\\main.c.o  -I. -I.  -gdwarf-2  -O0  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\StringFunctions\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\StringFunctions",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\StringFunctions\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\StringFunctions\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\memoryAllocation\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\memoryAllocation",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\memoryAllocation\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\memoryAllocation\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\CharArrays\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\CharArrays",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\CharArrays\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\CharArrays\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SecondChallenge\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SecondChallenge",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SecondChallenge\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SecondChallenge\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\ThirdChallenge\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\ThirdChallenge",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\ThirdChallenge\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\ThirdChallenge\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\NinthChallenge_Weather\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\NinthChallenge_Weather",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\NinthChallenge_Weather\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\NinthChallenge_Weather\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SeventhChallenge_GuessNumber\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SeventhChallenge_GuessNumber",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SeventhChallenge_GuessNumber\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SeventhChallenge_GuessNumber\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SixthChallenge_Amount2Pay\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SixthChallenge_Amount2Pay",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SixthChallenge_Amount2Pay\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\SixthChallenge_Amount2Pay\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\Prueba\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\Prueba",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\Prueba\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\Prueba\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\covertFile\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\covertFile",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\covertFile\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\covertFile\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\ForthChallenge_TimeChange\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\ForthChallenge_TimeChange",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\ForthChallenge_TimeChange\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\ForthChallenge_TimeChange\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\FifthChallenge_PrintSize\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\FifthChallenge_PrintSize",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\FifthChallenge_PrintSize\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\FifthChallenge_PrintSize\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\readLine\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\readLine",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\readLine\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\readLine\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\PointerBasics\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\PointerBasics",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\PointerBasics\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\PointerBasics\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\TicTacToe\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\TicTacToe",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\TicTacToe\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\TicTacToe\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\EighthChallenge_PrimeNumbers\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\EighthChallenge_PrimeNumbers",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\EighthChallenge_PrimeNumbers\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\EighthChallenge_PrimeNumbers\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\OurFirstProgram\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\OurFirstProgram",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\OurFirstProgram\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\OurFirstProgram\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\CountingCharinString\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\CountingCharinString",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\CountingCharinString\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\CountingCharinString\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }, {
+  "file": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\TenthChallenge_WriteFunctions\\main.c",
+  "directory": "C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\TenthChallenge_WriteFunctions",
+  "command": "C:/cygwin64/bin/gcc.exe -c C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\TenthChallenge_WriteFunctions\\main.c -o C:\\Users\\trcagj\\MyWorkspaces\\CourseofC\\TenthChallenge_WriteFunctions\\main.c.o  -I. -I.  -O0  -gdwarf-2  -std=c99  -Wall"
+ }]
