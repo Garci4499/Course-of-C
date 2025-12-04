@@ -1,6 +1,8 @@
 {
     "cmake.ignoreCMakeListsMissing": true,
     "files.associations": {
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "cstdint": "c",
+        "random": "c"
     }
 }
