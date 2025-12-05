@@ -1,0 +1,243 @@
+\section{The Standard C Library}
+
+\subsection{Standard header files}
+
+The C standard library offers functions that you can use in your programmes without having to code anything. In this Subsection, there will be an explanation of the main standard header files to use in C
+
+\subsubsection{stddef.h}
+
+This header contains some standard definitions:
+\begin{itemize}
+    \item \textbf{NULL:} A null pointer constant.
+    \item \textbf{offset of(struc, memb):} The offset in bytes of the member memb from the start of the structure struc, the type of the result is size\_t.
+    \item \textbf{ptrdiff\_t:} The type of integer produced by subtracting two pointers.
+    \item \textbf{size\_t:} The type of integer produced by the sizeof operator.
+    \item \textbf{wchar\_t:} The type of integer required to hold a wide character.
+\end{itemize}
+
+\subsubsection{limits.h}
+
+Contains various implementation-defined limits of character and integer data types.
+
+\subsubsection{stdbool.h}
+
+Contains definitions for working with Boolean variables: type \_Bool:
+\begin{itemize}
+    \item \textbf{bool:} Substitute name for the basic \_Bool data type.
+    \item \textbf{true:} Defined as 1.
+    \item \textbf{false:} Defined as 0.
+\end{itemize}
+
+\subsection{Various functions}
+
+A reminder of the C standard library that have already been addressed.
+
+\subsubsection{String functions}
+
+To use any of these functions, you need to include the header file string.h.
+
+\textbf{char *strcat(s1,s2):} Concatenates the character string s2 to the end of s1, placing a null character at the end of the final string. The function returns s1.
+
+\textbf{char *strchar(s,c):} Searches the string s for the first occurrence of the character c. If it is found, a pointer to the character is returned, otherwise, a null pointer is returned.
+
+\textbf{int strcmp(s1,s2):} Compares strings s1 and s2 and returns a value less than zero if s1 is less than s2, equal to zero if s1 is equal to s2 and greater than zero if s1 is greater than s2.
+
+\textbf{char *strcpy(s1,s2):} Copies the string s2 to s1, returning s1.
+
+\textbf{size\_t strlen(s):} Returns the number of characters in s, excluding the null character.
+
+\textbf{char *strncat(s1,s2,n):} Copies s2 to the end of s1 until either the null character is reached or n characters have been copied, whichever occurs first. Returns s1.
+
+\textbf{int strncomp(s1,s2,n):} Compares strings s1 and s2 and returns a value less than zero if s1 is less than s2, equal to zero if s1 is equal to s2 and greater than zero if s1 is greater than s2. Only compares the first n characters of the strings.
+
+\textbf{char strncpy(s1,s2,n):} Copies s2 to s1 until either the null character is reached or n characters have been copied, whichever occurs first. Returns s1.
+
+\textbf{char *strrchr(s,c):} Searches the string s for the last occurrence of the character c. If founf, a pointer to the character in s is returned, otherwise, the null pointer is returned.
+
+\textbf{char *strstr(s1,s2):} Searches the string s1 for the first occurrence of the string s2. If found, a pointer to the start of where s2 is located inside the s1 is returned, otherwise, if s2 is not located inside s1, the null pointer is returned.
+
+\textbf{char *strtok(s1,s2):} Braks the string s1 into tokens based on delimiter characters in s2.
+
+\subsubsection{Character functions}
+
+To use these character functions, you must include the file ctype.h.
+
+Examples: isalnum, isalpha, isblank, islower, isspace...
+
+Another two functions are \textbf{int tolower(c)} (returns the lowercase equivalent of c. If c is not an uppercase letter, c itself is returned) and \textbf{int toupper(c)} (returns the uppercase equivalent of c. If c is not an lowercase letter, c itself is returned).
+
+\subsubsection{Input/output functions}
+
+The most common I/O functions from the C library are included in the header file stdio.h.
+
+Also, definitions for the names EOF, NULL, stdin, stdout, stderr and FILE.
+
+\textbf{int fclose(Ptr):} closes the file identified by filePtr and returns zero if the close is successful or EOF if an error occurs.
+
+\textbf{int feof(filePtr):} returns nonzero if the identified file has reached the end of the file and zero otherwise.
+
+\textbf{int fflush(filePtr):} flushes (writes) any data from internal buffers to the indicated file, returning zero on success and EOF if an error occurs.
+
+\textbf{int fgetc(filePtr):} Returns the next character from the file identified by filePtr of EOF if an end of file condition occurs. The function returns an int.
+
+\textbf{int fgetpos(filePtr, fpos):} gets the current file position for the file associated with filePtr, storing it into the fpos\_t variable (defined in stdio.h) pointed to by fpos. fgetpos returns zero on success and nonzero on failure.
+
+\textbf{char *fgets(buffer, i, filePtr):} reads characters from the indicated file, until either i-1 characters are read or a newline character is read, whichever occurs first.
+
+\textbf{FILE *fopen(fileName, accessMode):} opens the specified file with the indicated access mode.
+
+\textbf{int fprintf(filePtr, format, arg1, arg2,..., argn} writes the specified arguments to the file identified by filePtr, according to the format specified by the character string format.
+
+\textbf{int fputc(c,filePtr):} writes the value of c to the file identified by filePtr, returning c if the write is successful and EOF otherwise.
+
+\textbf{int fputs(buffer, filePtr):} writes the characters in the array pointed to by buffer to the indicated file until the terminating null character in buffer is reached.
+
+\textbf{int fscanf(filePtr, format, arg1, arg2,...,argn):} reads data items from the file identified by filePtr, according to the format specified by the character string format.
+
+\textbf{int fseek(filePtr, offset, mode):} positions the indicated file to a point that is offsed (a long int) bytes from the beginning of the file, from the current position in the file, or from the end of the file, depending upon the value of mode (an integer).
+
+\textbf{long ftell(filePtr):} Returns the relatve offset in bytes of the current position in the file identified by filePtr or -1L on error.
+
+\textbf{printf(format, arg1, arg2,...,argn):} writes the specified arguments to stdout, according to the format specified by the character string. Returns the number of characters written.
+
+\textbf{int remove(fileName):} removes the specified file. A nonzero value is returned on failure.
+
+\textbf{int rename(fileName1, fileName2):} renames the file fileName1 to fileName2. A nonzero value is returned on failure.
+
+\textbf{int scanf(format, arg1, arg2,...argn):} reads items from stdin according to the format specified by the string format.
+
+\subsubsection{Conversion functions}
+
+To use these functions that convert character strings to numbers, you must include the header file stdlib.h.
+
+\textbf{double atof(s):} Converts the string pointed to by s into a floating point number, returning the result.
+
+\textbf{double atoi(s):} Converts the string pointed to by s into a int number, returning the result.
+
+\textbf{double atol(s):} Converts the string pointed to by s into a long int number, returning the result.
+
+\textbf{double atoll(s):} Converts the string pointed to by s into a long long int number, returning the result.
+
+\subsubsection{Dynamic Memory functions}
+
+To use these functions that allocate and free memory dynamically, you must include the stdlib.h header file.
+
+\textbf{void *calloc(n,size):} allocates contiguous space for n items of data, where each item is size bytes in length. The allocated space is initially set to all zeroes. On success, a pointer to the allocated space is returned, on failure, the null pointer is retruned.
+
+\textbf{void free(pointer):} Returns a block of memory pointed to by pointer that was previously allocated by a \textbf{calloc}, \textbf{malloc} or \textbf{realloc} call.
+
+\textbf{void *malloc(size):} allocates contiguous space of size bytes, returning a pointer to the beginning of the allocated block if successful and the null pointer otherwise.
+
+\textbf{void *realloc(pointer,size):} changes the size of a previously allocated block to size bytes, returning a pointer to the new block (which might have moved), or a null pointer if an error occurs.
+
+\subsection{Math functions}
+
+To use common math functions, you must include the math.h header file and link it to the math library.
+
+\textbf{double acosh(x):} returns the hyperbolic arccosine of x, with x greater or equal to 1.
+
+\textbf{double asin(x):} returns the arcsine of x, with x in the range -1 to 1. The angle is expressed in radians in the range $-\pi$/2 to $\pi$/2.
+
+\textbf{double atan(x):} returns the arctangent of x. The angle is expressed in radians in the range $-\pi$/2 to $\pi$/2.
+
+\textbf{double ceil(x):} returns the smallest integer value greater than or equal to x. The value is returned as double.
+
+\textbf{double cos(r):} returns the cosine of r.
+
+\textbf{double floor(x):} returns the smallest integer value lower than or equal to x. The value is returned as double.
+
+\textbf{double log(x):} returns the natural logarith of x, with x greater than or equal to zero.
+
+\textbf{double nan(s):} returns a NaN, if possible, according to the content specified by the string pointed to by s.
+
+\textbf{double pow(x,y):} returns $\si{x^y}$. If x is less than zero, y must be an integer. If x is zero, y must be greater than zero.
+
+\textbf{double remainder(x,y):} returns the remainder of x divided by y.
+
+\textbf{double round(x):} returns the value of x rounded to the nearest integer in floating point format. Halfway values are always rouned away from zero (0.5 is rounded to 1.0).
+
+\textbf{double sin(r):} returns the sine of r.
+
+\textbf{double sqrt(x):} returns the square root of x, x greater than or equal to zero.
+
+\textbf{double tan(r):} returns the tangent of r.
+
+And so many more, there is a complex arithmetic library.
+
+\subsection{Utility functions}
+
+These functions are usually in the header file stdlib.h
+
+\textbf{int abs(n):} returns the absoulte value of its int argument n.
+
+\textbf{void exit(n):} terminates programme execution, closing any open files and returning the exit status specified by its argument n. EXIT\_SUCCESS and EXIT\_FAILURE are defined in stdlib.h. Other related routines in the library are abort and atexit,
+
+\textbf{char getenv(s):} returns a pointer to the value of the environment variable pointed to by s or a null pointer if the variable does not exist. It is used to get environment variables.
+
+\textbf{void qsort(arr,n,size, comp\_fn):} sorts the data array pointed to by the void pointer arr. There are n elements in the array, each size bytes in length. n and size are of type size\_t. The fourth argument is of type pointer to function that returns int and that takes two void pointers as arguments. qsort calls this function whenever it need to compare two elements in the array, passing ir pointers to the elements to compare.
+
+\textbf{int rand(void):} returns a random number in the range 0 to RAND\_MAX, where RAND\_MAX is defined in stdlib.h and has a minimum value of 32767.
+
+\textbf{void(srand(seed):} seeds the random number generator to the unsigned int value seed.
+
+\textbf{int system(s):} gives the command contained in the character array pointed to by s to the system for execution, returning a system-defined value. system("mkdir/usr/tmp/data").
+
+\subsubsection{Assert library}
+
+The assert library, supported by the assert.h hader file is a small one desgined to help with debugging programmes. 
+
+It consists of a macro called \textbf{assert}, that takes as its argument an integer expression. If the expression evaluates as false (nonzero), the macro writes an error message to the standard error stream (stderr) and calls the \textbf{abort()} function, which terminates the programme. Example:
+
+\textbf{z = x*x - y*y;}
+
+\textbf{assert(z$>$=0);} // asserts that z is greater than or equal to zero.
+
+\subsubsection{Other useful header files}
+
+\textbf{time.h:} defines macros and functions supporting operations with dates and times.
+
+\textbf{errno.h:} defines macros for the reporting of errors.
+
+\textbf{locale.h:} defines functions and macros to assit with formatting data such as monetary units for different countries.
+
+\textbf{signal.h:} defines facilities for dealing with conditions that arise during programme execution, including error conditions.
+
+\textbf{stdarg.h:} defines facilities that enable a variable number of arguments to be passed to a function.
+
+\section{Conclusions}
+
+\subsection{Further topics of study}
+
+There are still a few advanced concepts of C not studied in this course: more on data types (defining your own types with typedef), more on the preprocessor (string concatenation) more on void*, static libraries and shared objects, macros, unions, function pointers (pointers that point to a function), advanced pointers (pointers that point to a pointer), variable arguments of functions (variadic functions), dynamic linking (dlm\_open), signals, forking and inter-process communication, threading and concurrency, sockets.
+
+There are functions for restoring previous states: setjmp and longjmp. Other topics are memnory management, fragmentation, portability of the programme, interfacing with kernel modules, compiler and linker flags, advanced use of the debugger (gdb), profiling and tracing tools (gprof, dtrace, strace), memory debugging tools such as valgrind...
+
+\subsection{Course Summary}
+
+The main topics of the course are:
+\begin{itemize}
+    \item CodeBlocks as environment
+    \item \textbf{Basic Operators:} logical, arithmethic, assignment.
+    \item \textbf{Conditional Statements:} Making decisions: if, switch.
+    \item \textbf{Repeating Code:} looping: for, while, do-while.
+    \item \textbf{Arrays:} Defining and initialising, multi-dimensional.
+    \item \textbf{Functions:} Declaration and use, arguments and parameters, call by value vs call by reference.
+    \item \textbf{Debugging:} Call stack, common mistakes, understanding compiler messages.
+    \item \textbf{Structs:} Initialising, nested structures.
+    \item \textbf{Character strings:} basics, arrays of chars, character operations.
+    \item \textbf{Pointers:} Most important topic: definition and use, using with functions and arrays, malloc, pointer arithmethic.
+    \item \textbf{Preprocessor:} $\#$define, $\#$include.
+    \item \textbf{Input and Output:} command line arguments, scanf, printf.
+    \item \textbf{File Input and Output:} Reading and writing to a file: fgetc, fgets, fputc, fseek, etc.
+    \item \textbf{Standard C Library:} string functions, math functions, utility functions, standard header files.
+\end{itemize}
+
+
+The main course outcomes are the following:
+\begin{itemize}
+    \item You are now able to write beginner C programmes.
+    \item You are now able to write efficient, high quality C code: modular, low coupling (small number of dependencies), naming conventions, indentation.
+    \item You are now able to find and fix your errors: you understand compiler messages and know how to use a debugger.
+    \item You now know understand fundamental aspects of the C programming language.
+\end{itemize}
+

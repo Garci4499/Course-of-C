@@ -1,0 +1,560 @@
+\section{Arrays}
+
+\subsection{Creating and using arrays}
+
+Arrays are a type of data that allows to store different data values of a specified type in a single variable. Arrays allows to group variables together under a single name, without needing separated variables for each item of data.
+
+An array is a fixed (once created, its size cannot be modified, important limitation) number of data items that are all of the same type (you cannot mix data types, for example integers and doubles). 
+
+The data items in an array are called elements.
+
+Declaring an array is similar to a normal variable that contains a single value, but you need a number between square brackets [] following the name. Example: \textbf{long numbers[10];} means that it is an array of size 10 called numbers with values of type long.
+
+Each of the data items stored in an array is accessed by the same name. If you want a particular element, you use an index value between square brackets following the array name.
+
+Index values are sequential integers that start from zero. Index values for elements in an array of size 10 would be 0-9. Arrays are zero-based; 0 is the index value for the first array element, and the last array element number will be its size minus 1.
+
+It is a very common mistake to assume that arrays start from one (as happens in MATLAB). This is called the off-by-one error. To access the fourth value in an array, use the expression arrayName[3].
+
+You can also specify an index for an array element by an expression in the square brackets following the array name. The expression must result in an integer value that corresponds to one of the possible index values.
+
+It is very common to use a loop to access each element in an array:
+
+\textbf{for i=0; i$<$10; ++i}
+
+\textbf{printf("Number is \%d", numbers[i]);}
+
+If you use an expression or a variable for an index value that is outside the range of the array, your programme may crash, or the array can contain garbage data. This is referred to as an out-of-bounds error. The problem of this error is that the compiler cannot check this, so the programme will still compile. It is very important to ensure that the arrays remain in its bounds.
+
+A value can be stored in an element of an array simply by specifying the element of the array on the left side of an equal sign: \textbf{grades[100] = 95;}.
+
+\subsection{Initialising an array}
+
+You will want to assign initial values for the elements of your array most of the time. Definining initial values for array elements makes it easier to detect when things go wrong.
+
+Just as you can assign initial values to variables when declared, you can also assign initial values to an array's elements. To initialise the values of an array, provide the values in a list enclosed in curly braces {} and with the values separated by commas. Example: \textbf{integers[5] = {0,1,2,3,4};}.
+
+It is not necessary to completely initialise an entire array. If fewer values are specified, only the first elements are initialised, and the remaining values are set to zero. Example: \textbf{float sample\_data[500] = {100.0, 300.0, 500.5};} initialises the first three values of the float to 100.0, 300.0 and 500.5 and the remaining 497 elements to zero.
+
+C99 added a feature called designated initializers. It allows to pick and choose which elements are initialised by enclosing an element number in a pair of brackets. The example above would be: \textbf{float sample\_data[500] = { [2] = 500.5, [1] = 300.0, [0] = 100.0};}.
+
+C does not provide any shortcut mechanisms to initialise the array elements to the same number. If it were desired to initially set all 500 values of \textbf{sample\_data} to 1, all 500 would have to be explicitly assigned. To solve this problem, normally the array values are initialised inside the programme using a loop.
+
+\subsection{Challenge Prime Numbers}
+
+The programme should find all prime numbers from 3-100. There will be no input to the programme and the input will be each prime separated by a space on a single line. You can hard-code the first two prime numbers in the primers array. You should utilise loops to only find prime numbers up to 100 and a loop to print out the primes array.
+
+The criteria that can be used to identify a prime number is that a number is considered prime if it not evenly divisible by any other previous prime numbers. 
+
+The solution is the following:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures/8_Arrays/SolutionPrimeNumber1.png}
+    \caption{Solution Challenge Prime Number 1}
+    \label{fig:solution_challenge_prime_number_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//8_Arrays/SolutionPrimeNumber2.png}
+    \caption{Solution Challenge Prime Number 2}
+    \label{fig:solution_challenge_prime_number_2}
+\end{figure}
+
+\subsection{Multidimensional arrays}
+
+Until now, all arrays seen have ben lineal arrays, with single dimensions. However, C allows arrays of any dimension to be defined. Two dimension arrays are the most common. It represents a matrix with rows and columns, and this is the most natural application. An example of a two-dimensional array declaration would be: \textbf{int matrix[4][5];}. This declares the array matrix to be a two-dimensional array consisting of 4 rows (first bracket for rows) and 5 columns (second bracket for columns) for a total of 20 elements.
+
+To initialise a two-dimensional array, it is done in the same manner of a one-dimensional. When listing elements for initialisation, the values are listed by row. The difference is that you put the initial values of each row between braces and then enclose all the rows between braces. Example:
+
+\textbf{int numbers[3][4] = \{}
+
+    \textbf{{10,20,30,40}, // Values for the first row}
+    
+    \textbf{{15,25,35,45}, // Values for the second row}
+    
+    \textbf{{47,48,49,50}  // Values for the third row}
+    
+\textbf{\}}
+
+Commas are required after each brace that closes off a row, except in the case of the final row. The use of the inner pair of braces is optional, but should be used for readability.
+
+Multidimensional arrays are also zero-based; the first row and column will be [0][0]. They also do not require that the entire array is initialised; you can initialise only certain rows and columns, and remaining values will be set to 0. In this case, the inner pairs of braces are required to force the correct initialisation.
+
+Subscripts can be used in the initialisation list in a similar manner to single-dimensional arrays: \textbf{ int matrix [4] [3] = {[0] [0] = 1, [1] [1] = 5, [2] [2] = 9}}. Unspecified elements are set to zero by default.
+
+Everything mentioned so far about two-dimensional arrays can be generalised to three-dimensional arrays and further. Example: \textbf{int box[10][20][30]}. Typically, to initialise and handle a three-dimensional array, you need three nested loops, four for four-dimensional arrays, and so on. Each loop iterates over one dimension. For multidimensional arrays, the process of initialisation can be extended a lot, with several levels of nested brackets.
+
+\subsection{Challenge Weather}
+
+The programme will find the total rainfall for each year, the average year rainfall, and the average rainfall for each month. The input will be a 2D array with hard-coded values for rainfall amounts for the past 5 years. The array should have 5 rows and 12 columns, with rows being years and columns being months. Rainfall amounts can be floating point numbers.
+
+The output shall be the total rainfall for each year, the yearly average and the monthly averages, in that order.
+
+The solution to the challenge is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//8_Arrays/SolutionWeather1.png}
+    \caption{Solution Challenge Weather 1}
+    \label{fig:sol_challenge_weather_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//8_Arrays/SolutionWeather2.png}
+    \caption{Solution Challenge Weather 2}
+    \label{fig:sol_challenge_weather_2}
+\end{figure}
+
+\subsection{Variable length arrays}
+
+So far, the sizes of an array have been specified using a number. The term variable does not mean that you can modify the length of the array after creating it, it will keep the same size after creation, but the size will be defined by using a variable. You can not initialise a VLA in declaration. 
+
+Example: 
+
+\textbf{int n = 5;}
+
+\textbf{float a[n];\}} 
+
+The example creates a float variable of a length that depends on the value of the variable n, that for this case is 5.
+
+\section{Functions}
+
+\subsection{Basics}
+
+A function is a self-contained unit of programme code designed to accomplish a particular task. Syntax rules define its structure and how to use it.  A function in C is the same as a subroutine or procedure in other programming languages. 
+
+Some functions cause an action to take place, for example: \textbf{printf()}, that causes the data to be printed on the screen. Other functions find a value for a programme to use, for example: \textbf{strlen()} tells a programmeme how long a certain string is.
+
+Its advantages are because ease the test, debug, and maintain of a programme, tasks much more difficult in single large main functions. The tasks can be divided into several independent subtasks, reducing complexity and separating functions for each subtask. It also reduces duplication of code, saving time when writing, testing, and debugging code. If you have to do a certain task several times in a programme, you only need to write a function once and use it when needed. Besides, it helps with readability, resulting in better organised programmes and easier to read and change. They also allow parts of the programme to be developed, tested, and debugged independently, reducing the overall development time. Functions can also be used for other different programmes. Many programmers think of functions as a black box, with information that goes in (input) and information that goes out (output). Using this black-box thinking helps to concentrate on the programme overall design rather than the details.
+
+The arguments of the functions are in parentheses after the function name. For example, for \textbf{printf()} the first argument is a string and the following the variables or expressions to display.
+
+The information received from a function can be received in two ways: through one of the function arguments (the output takes the value of one of the inputs, \textbf{scanf()} for example) or as a return value.
+
+To call functions, they must be implemented first, by using libraries or using user-defined functions, functions written by the programmer. 
+
+Always use descriptive function names to make it clear what the programme does and how it is organised. If you make the functions general enough, you can reuse them in other programmes.
+
+The main function is the starting point of the programme and all C programmes must have a main. The main function can also receive input (command line arguments) and returning data (error code) as optional features.
+
+\subsection{Defining functions}
+
+When creating a function, the function header is specified as the first line of the function definition followed by a starting curly brace. The executable code of the function is in between the starting and the ending curly braces, and is called the function body. 
+
+The function header defines the name of the function, their parameters (the number and types of values passed to the function when is called), and the type for the value that the function returns. The function body contains the statements executed when the function is called and have access to any values passed as arguments to the functions. The structure would be:
+
+\textbf{Return\_type Function\_name(Parameters)}
+
+\textbf{\{}
+
+\textbf{Statements}
+
+\textbf{\}}
+
+The arguments of the function must be separated by commas.
+
+The first line of a function definition tells the compiler (in order from left to right) three things about the function: the type of value it returns, its name, and the arguments it takes. Choosing meaningful function names is as important as choosing meaningful variable names, greatly affecting the programme readability.
+
+The keyword void implies that the function does not return data.
+
+Statements in the function body can be absent, but the braces must be present. If there are no statements in the body of a function, the return type must be void, and the function will not do anything. Defining an empty function is often useful during testing phase, allowing to run the programme with only selected functions, then adding the detail for the function bodies step by step, testing at each stage, until the whole thing is implemented and fully tested.
+
+The name of a function can be any legal name: not a reserved word (int, double, main...), not the same name as other functions of the programme or of a standard library function (this would prevent you from using the library function).
+
+A legal name has the same form as that of a variable: sequence of letters and digits, the first character must be a letter, and an underline character counts as a letter. The name should be meaningful and relevant to the function.
+
+There are three appraches to define function names with more than one word:
+\begin{itemize}
+    \item Separate each word with an underline character: function\_name.
+    \item Capitalise the first letter of each word: FunctionName.
+    \item Capitalise words after the first: functionName.
+\end{itemize}
+
+A function prototype is a statement that defines a function. It defines its name, its return type value, and the type of each parameter. Provides all the external specifications for the function. You write a prototype exactly as a function header, but adding a semicolon at the end. Example: \textbf{void printMessage(void);}. A function prototype enables the compiler to generate the appropriate instructions at each point where you call the function and to check if you are using the function correctly in each invocation. 
+
+When you include a standard header file in a programme, the header file adds the function prototypes for that library to the programme. The header file stdio.h contains function prototypes for \textbf{printf()}, among others. They usually appear at the beginning of a source file before the implementation of any functions in a header file. Allows any of the functions in the file to call any function regardless of where you have placed the implementation of the functions. Parameter names do not have to be those used in the fnuction definition. 
+
+It is good practice to always include declarations for all the functions in a programme source file, regardless of where are called, helping to keep the programmes consistent in design and preventing any error from occurring if you choose to call a function from another part of the programme.
+
+Example: \textbf{double Average(double data:values[], size\_t, count);}.
+
+\subsection{Arguments and parameters}
+
+A parameter is a variable in a function declaration and function definition/implementation. The declaration is the function prototype and the definition is the actual code. 
+
+When a function is called, the arguments are the data you pass into the functions' parameters, the actual value of a variable that gets passed to the function. Function parameters are defined within the function header, and they are placeholders for the arguments that need to be specified when the function is called.
+
+The parameters for a function are a list of parameter names with their types, each parameter separated by a comma. The entire list of parameters is enclosed between the parentheses that follow the function name. A function can have no parameters, in which case you should put void between the parentheses.
+
+Parameters provide the means to pass data to a function; they are data passed from the calling function to the function that is called. The names of the parameters are local to the function; they will assume the values of the arguments that are passed when the function is called. The body of the function should use these parameters in its implementation. A function body may have additional locally defined variables that are needed for the function implementation. 
+
+When passing an array as an argument to the function, you must also pass an additional argument specifying the size of the array. The function has no means of knowing how many elements there are in the array.
+
+Example: When \textbf{printf()} is called, you always supply one or more values as arguments, the first value being the format string and the remaining any variables to display. 
+
+Parameters greatly increase the usefulness and flexibility of a function, since it allows to operate in different ways according to the input data that receive.
+
+It is a good idea to add comments before each of the function definitions to explain what the function does and how the arguments are to be used.
+
+Example: \textbf{void multiplyTwoNumbers(int x, int y)}
+
+\textbf{int result = x*y}
+
+This is a flexible function that receives the two arguments that you want as the parameters x and y and provides different results for each combination of the parameters provided.
+
+\subsection{Returning data from functions}
+
+You might now always want to have the results of your calculations displayed. Functions can return data using specific syntax. The first thing to write in a function is the return type, which specifies the type of the value returned by the function.
+
+You can specify any legal type of value to be returned, including enumeration types and pointers. The return type can also be of type void, which means that no value is returned. Using void helps the readability of a function. The return statement provides the means of exiting from a function.
+
+The return statement provides the means of exiting from a function. Using \textbf{return;} implies that the return type is void and does not return a value; it only exits the function. The more general form of the return statement is: \textbf{return expression;}, where the expression must be of the return type specified of the function, that must be of a different type from void.
+
+The value that is returned to the calling programme is the value that results when expression is evaluated and must be of the specified type of the function.
+
+A function that has statements in the function body but does not return a value must have the return type as void. An error message will appear if you compile a programme that contains a function with a void return type that tries to return a value.
+
+A function that does not have a void return type must return a value of the specified return type. An error message will appear if return type is different from the specified one. 
+
+If expression results in a value that is a different type from the return type in the function header, the compiler will insert a conversion from the type of expression to the one required. If conversion is not possible, the compiler will produce an error message.
+
+There can be more than one return statement in a function. Each return statement must supply a value that is convertible to the type specified in the function header for the return value.
+
+\subsubsection{Invoking a function}
+
+You call a function using the function name followed by the argument to the function between parentheses. When you call the function, the values of the arguments that you specify in the call will be assigned to the parameters in the function.
+
+When the function executes, the computation proceeds using the values you supplied as arguments. The arguments you specify when you call a function should agree in type, number, and sequence with the parameters in the function header.
+
+If the function is used as the right side of an assignment statement, the return value supplied by the function will be substituted for the function. Example: \textbf{int x myFunctionCall();} will assign the return value of myFunctionCall (that must be an integer) to the variable x.
+
+The calling function does not have to recognise or process the value returned from a called function. It is up to you how to use any values returned from function calls.
+
+\subsection{Local and Global Variables}
+
+Local variables are variables defined inside a function. They are automatically created each time the function is called. Their values are local to the function and cannot be accessed from outside the function. If an initial value is given to a variable inside a function, that initial value is assigned to the variable each time the fnuction is called. 
+
+The auto keyword can be used to be more precise in defining local variables, but it is not necessary as the compiler adds this by default.
+
+Local variables are also applicable to any code where the variable is created in a block (loops, if statements).
+
+Global variables are the opposite; they can be accessed by any function in the programme. A global variable has the lifetime of the programme. Global variables are declared outside of any function and do not belong to any particular function. Any function in the programme can change the value of a global variable.
+
+If there is a local variable declared in a function with the same name as a global variable, then, within that function, the local variable will mask the global variable. Therefore, for this function, the global variable is not accessible and it is prevented to access it normally.
+
+An example of creation of local ang global variables and where can I use them can be seen in the following Figure:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/LocalGlobalVariablesExample.png}
+    \caption{Example of local ang global variables}
+    \label{fig:example_local_global_variables}
+\end{figure}
+
+In general, global variables are bad and should be avoided. They promote coupling between functions (dependencies), make it hard to find the location of a bug in a programme, and also make it hard to fix it. Instead, use parameters in functions; if there is a lot of data, use a struct.
+
+\subsection{Challenge Write functions}
+
+The programme shall have three functions. One to find the greatest common divisor of two non-negative integer values and return the result (takes two ints as parameters and returns an int). Another to calculate the absolute value of a number (takes as parameter a float and return a float) and test it with ints and floats. And a final one to comupte the square root of a number. If anegative argument is passed, a message will be displayed an -1.0 should be returned. You should use the function of absolute value as implemented in the previous step.
+
+The function of the greatest common divisor is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/MCD1.png}
+    \caption{Greatest common divisor function 1}
+    \label{fig:MCD_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/MCD2.png}
+    \caption{Greatest common divisor function 2}
+    \label{fig:MCD_2}
+\end{figure}
+
+The function for the absolute value is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/AbsoluteValue.png}
+    \caption{Absolute value function}
+    \label{fig:abs_value}
+\end{figure}
+
+The function for the square root is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/SquareRoot.png}
+    \caption{Square root function}
+    \label{fig:square_root}
+\end{figure}
+
+\subsection{Challenge Tic Tac Toe}
+
+The programme should be a tic-tac-toe. It is a game played on 3x3 grid, the game played by two players, who take turns. You must create an array to represent the board. Can be of type char and consist of 10 elements (do not use zero). Each element represents a coordinate on the board that the user can select. 
+
+Some functions that you should create are: checkforWin (checks if a player has won the game or if it is a draw), drawboard (redraws the board for each player turn) and markBoard(sets the char array with a selection and check for an invalid selection).
+
+The solution is in the Workspace of the C course (too long to be put in here).
+
+\section{Character strings}
+
+\subsection{Overview}
+
+A string is a word enclosure between quotation marks "". 
+
+The data type char contains a single character. To assign a single character to a char variable, the character is enclosed within a pair of single quotation marks ''. There is a distinction between single quotation marks '' and double quotation marks "". They are used to create two different types of constants in C.
+
+Every time a message has been displayed using the \textbf{printf()} function, you have defined the message as a constant string. To display a quotation mark in a string, it must be preceded by $\backslash$. Equally, to print $\backslash$, you have to put two consecutive $\backslash$.
+
+The string in memory occupies one bit per character, with the spaces being empty bits and ended with a null character $\backslash$0, a special character added to the end of each string to mark where it ends. A string is always terminated by a null character, so in reality the length of a string is always one greater than the number of characters in the string.
+
+The null character is not the same as NULL, a symbol that represents a memory address that does not reference anything.
+
+\subsection{Defining a string}
+
+C has no special variable for strings. This means that there are no special operators in the language for processing strings. The standard library provides an extensive range of functions for handling strings.
+
+Strings in C are stored in an array of type char. Characters in a string are stored in adjacent memory cells, one character per cell. To declare a string in C, simply use the char type and the brackets to indicate the size. Example: \textbf{char myString[20]}. This variable can accommodate a string that contains up to 19 characters (one element is for the termination character).
+
+When you specify the size of an array that you intend to use to store a string, it must be at least one greater than the number of characters that you want to store, since the compiler automatically adds the null character at the end of every string constant.
+
+You can initialise a string variable when you declare it. Example: \textbf{char word[] = {'H','e','l','l','o'}} initialises a char string of 6 characters (5 plus the null character that will be later added by the compiler) and the statement reserves space in memory for 6 characters. 
+
+You can specify the size of a string explicitly, but it is important to consider the extra null character. If the size is too small, the compiler does not put a null character at the end and does not complain about it, which may cause errors, so it is better not to declare the size of the array if possible and let the compiler decide. Also, you can initialise only a part of the char array, and the rest will be empty.
+
+Since you cannot assign arrays in C, you cannot assign a string either. The following example is an error:
+
+\textbf{char s[100];}
+
+\textbf{s = "hello";}
+
+You are preforming an assingment operation and you cannot assign one array of characters to another array of characters like this. You have to use a special function \textbf{strncpy()} to assign a value to a char array after it has been declared or initialised. The other option is to assign each character individually, but that could take a long time for large arrays.
+
+When you want to refer to a string stored in an array, you just use the array name by itself. To display a string as output using the \textbf{printf()} function, you do the following: \textbf{printf("$\backslash$n The message is: \%s", message)} The \%s is the format specifier for outputting a null-terminated string. The function assumes that the string to display has a null character to end it, so it may cause problems if the definition is wrong and the null character has not been assigned.
+
+To input a string through the keyborad, use the \textbf{scanf()} function using the \%s format specifier. Example: \textbf{scanf("\%s", input);}. Note that there is no need to use the \& on a string. This function will only read until the first space appears; to read the complete strings there are other functions to use.
+
+You cannot directly test two strings to see if they are equal with a statement such as \textbf{if (string1 == string2)}. The equality operator can only be applied to simple variable types, so it does not work on structures and arrays.
+
+To determine if two strings are equal, you must explicitly compare the two character strings character by character. There is an easier way, which will be discussed later by using the \textbf{strcmp()} function.
+
+\subsection{Constant strings}
+
+There are strings that cannot be modified. For example, the name pi for the $\pi$ number instead of including the value everytime.
+
+The preprocessor lets you define constants: \textbf{$\#$define TAXRATE 0.015}. When you programme is compiled, the value 0.015 will be substituted wherever you have used TAXRATE, which is called compile-time substitution. A defined name is not a variable, you cannot assign a value to it. The define statement has a spaceial syntax, there is no equal sign, and there is no semicolon at the end.
+
+The deinfe statements can appear anywhere in a programme. There is no local define. Most programmers define them at the beginning of the programme or inside an include file. The define statements make the programmes more portable. It also can be used for character and string constants. Example: \textbf{$\#$define BEEP '$\backslash$a}
+
+C90 added a second way to create symbolic constants, the keyword const. Example: \textbf{const int MONTHS = 12;}, MONTHS is a symbolic constant for 12, it can be displayed and used in calculations but cannot be changed (it is not a variable).
+
+const is more flexible than using define, it lets to declare a type and allows better control over which part of a programme can use the constant. 
+
+Another way to create the symbolic constants are the enums variables.
+
+Initialising a char array and declaring it as a constant is a good way of handling standard messages. Example: \textbf{const char message[] = "The end of the world is here"}. Because you declare the message as const, it is protected from being modified explicitly within the programme, any attempt to do so will result in an error message from the compiler. This technique for defining standard messages is useful if they are used in many places within a programme, preventing accidental modification of such constant in other parts of the programme.
+
+\subsection{Challenge Understanding char arrays}
+
+You must write a function to count the number of characters in a string (length). Cannot use standard library functions, the function should take a character arrays as a parameter and should return an int (the lenght).
+
+Also, you must write a function to concatenate two character strings, without using standard functions. The function should take 3 parameters: char result[], const char str1[] and const char str2[]. It can return void.
+
+Finally, you must write a function that determines if two strings are equal. Cannot use strcmp library function and function should take two const char arrays as aprameters and return a Boolean of true if they are equal and false otherwise.
+
+The function to count the number of characters of a string is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/Lengthfunction.png}
+    \caption{Length function}
+    \label{fig:length_function}
+\end{figure}
+
+The function to concatenate two strings is
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/ConcatenateFunction.png}
+    \caption{Concatenate function}
+    \label{fig:concatenate_function}
+\end{figure}
+
+The function to compare two strings is:
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/StringsComparison1.png}
+    \caption{String comparison function 1}
+    \label{fig:string_comparison_function_1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/StringComparison2.png}
+    \caption{String comparison function 2}
+    \label{fig:string_comparison_function_2}
+\end{figure}
+
+\subsection{Common string functions}
+
+C provides many functions specifically designed to work with string. The following are:
+\begin{itemize}
+    \item \textbf{strlen():} It gets the length of a string.
+    \item \textbf{strcpy()} and \textbf{strncpy():} Copy one character string to another.
+    \item \textbf{strcat()} and \textbf{strncat():} Combine two characters strings together (concatenation).
+    \item \textbf{strcmp()} and \textbf{strncmp():} Determine if two character strings are equal.
+\end{itemize}
+
+The C library supplies these string.handling function prototypes in the string.h header file.
+
+\subsubsection{strlen()}
+
+It finds the length of a string and returns it as a size\_t. The string.h header file is required. This function does change the string, so the function header does not use const in declaring the fomal parameter string. Example: \textbf{size\_t = strlen(string1);}
+
+\subsubsection{strcpy() and strncpy()}
+
+You can use these functions to copy a string to an existing string. This function is useful since you cannot assign strings directly in C. Is the equivalent of the assignment operator for strings of characters. The first argument of the function is the string od destination and the second the string that you want to copy. Example: \textbf{strcpy(destination, "This is the source"} will copy "This is the source" into the array destination.
+
+\textbf{strcpy()} does not check if the string copied fits in the destination string, so a safer way to copy is \textbf{strncpy()} that fnuctions exactly the same but adds a thrid argument, the maximum number of characters to copy. Example: \textbf{strcpy(destination, "This is the source", 10} will copy the first 10 characters of the array into destination.
+
+\subsubsection{strcat() and strncat()}
+
+This functions take two strings for arguments: a copy of the second string is tacked onto the end of the first, this combined version becomes the new first string and the second sring is not altered. It returns the value of the first argument. Example: \textbf{strcpy(dest, src))} returns in dest the combination of the previous dest and src. 
+
+As happened with \textbf{strcpy()}, \textbf{strcat()} does not check whether the second string will fit in the first array. If you fail to allocate enough space for the first array, you will run into problems as excess characters overflow into adjacent memory locations. 
+
+\textbf{strncat()} takes a third argument indication the maximum number of characters to add. For example: \textbf{strcpy(dest, src, 15))} returns in dest the combination of the previous dest and only the 15 additional characters (or the number of characters until the null character, what comes first) of src, so it is safer. 
+
+\subsubsection{strcmp() and strncmp()}
+
+The strings cannot be compared using ==, they are compared using these functions. It does not compare arrays, so it can be used to compare strings stored in arrays of different sizes, and it does not compare characters.
+
+\textbf{strcmp()} returns 0 if the two string arguments are the same and nonzero, it returns $<$0 to indicate that str1 is less than str2 and it returns $>$0 to indicate that str1 is more than str2.
+
+\textbf{strcmp()} compares strings until it finds corresponding characters that differ, which could take the search to the end of one of the strings. \textbf{strncmp()} compares the strings until they differ or until it has compared a number of characters specified by a third argument. This is useful, for example, when you want to search for things that begin for a certain words. If you want to search things that begin with astro, you could limit the search to the first five characters.
+
+\subsection{Challenge Common string functions}
+
+Write a programme that displays a string in reverse order. It should read input from the keyboard and use the strlen string function. Another function should sort the strings in an array using a bubble sort. It need to use the strcmp and strcpy functions.
+
+The solution is the following:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/CommonStringFunctions1.png}
+    \caption{Challenge Common string functions 1}
+    \label{fig:challenge_common_string_functions_1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//9_Functions/CommonStringFunctions2.png}
+    \caption{Challenge Common string functions 2}
+    \label{fig:challenge_common_string_functions_2}
+\end{figure}
+
+\subsection{Searching, tokenising and analysing strings}
+
+All the functions seen in this Subsection are included in the header file string.h. Searching a string is finding a single character or a substring in a string. Functions: \textbf{strchr()} and \textbf{strstr()}. Tokenising a string is breaking a sequence of characters bounded by delimiters (space, comma, period) into different words. Function: \textbf{strtok()}. Other functions are for analysing strings: \textbf{islower, issuper, isalpha...}
+
+The pointer will be seen in depth in the next Section, but a quick peek may be useful to understand some of these functions. C provides a remarkably useful type of variable called a pointer, a variable that stores an address. Its value is the address of another location in memory that can contain a value. The \textbf{scanf()} function uses addresses by the symbol \& before the variable, which marks that it is a pointer. 
+
+Example: \textbf{int Number = 25;}
+
+\textbf{int *pNumber = \&Number;}
+
+Above, we declare a variable Number with the value of 25 and a pointer, pNumber, which contains the address of Number. The asterisk is used to declare a pointer. To get the value of the variable pNumber, you can use the asterisk to dereference the pointer: \textbf{*pNumber = 25;}. * is the dereference operator, and its effect is to access the data stores at the address specified by a pointer.
+
+The value of \&Number is the address where NUmber is located and it is used to initialise pNumber in the second statement. 
+
+Many of the string functions return pointers.
+
+\subsubsection{Searching a string for a character}
+
+The function \textbf{strchr()} searches a given string for a specified character. The first argument is the string to be searched (which will be the address of a char array) and the second is the character that you are looking for. The function will search the string starting at the beginning and return a pointer to the first position in the string where the character is found, the address of this position in memory. Is of type char*, described as pointer to char.
+
+To store the returned value, you must create a variable that can store the address of a character. If the character is not found, the function returns a special value NULL, hte equivalento of 0 for a pointer and represents a pointer that does not point to anything.
+
+Example:
+
+\textbf{char str[] = "The quick brown fox";}  The string to be searched
+
+\textbf{char ch = 'q';} The character we are looking for
+
+\textbf{char *pGot\_char = NULL;} Pointer initialised to NULL
+
+\textbf{pGot\_char = strchr(str,ch);} Stores address where ch is found.
+
+The first argument is the address of the first location to be searched, the second the character sought (it expects a type int, so it converts the type char to int) and the output will point to the value "The quick brown fox".
+
+The \textbf{strstr()} function is probably the most useful of all searching functions. It searches one string for the first occurrence of a substring and returns a pointer for the position, if no match, returns NULL. The first argument is the string that is to be searched, and the second the substring you are looking for.
+
+Example: 
+
+\textbf{char text[] = "Every dog has its day";}  The string to be searched
+
+\textbf{char word[] = "dog";} The substring we are looking for
+
+\textbf{char *pFound = NULL;} Pointer initialised to NULL
+
+\textbf{pFound = strstr(text,word);} Stores address where word is found.
+
+Since the string dog appears starting at the seventh character of text, pFound will be set to the address text+6 ("dog has its day"). The search is case-sensitive, so "Dog" will not be found.
+
+\subsubsection{Tokenizing a string}
+
+A token is a sequence of characters within a string bounded by delimiters. A delimiter can be anything, but should be unique to the string: spaces, commas, periods, etc. Tokenising is breaking a sentence into words, and to do that the \textbf{strtok()} function is used. It requires two arguments: a string to be tokenised and a string containing all possible delimiter characters.
+
+Example:
+
+\textbf{char str[80] = "Hello how are you - my name is - Daniel";}
+
+\textbf{const char s[2] = "-";}
+
+\textbf{char *token;}
+
+\textbf{token = strtok(str,s);}
+
+This will result into the first word: "Hello how are you". If you enter it in a loop while until finding NULL, it will tokenise the entire string.
+
+\subsubsection{Analysing strings} \label{Character functions}
+
+These are functions to obtain a characteristic of a character. The argument to each of these functions is the character to be tested. They return a nonzero value of type int if the character is within the set that is being tested for. They convert to true and false, so you can use them as Boolean values.
+
+\begin{itemize}
+    \item \textbf{islower():} Tests for lowercase letter.
+    \item \textbf{issupper():} Tests for uppercase letter.
+    \item \textbf{isalpha():} Tests for lowercase or uppercase letter.
+    \item \textbf{isalnum():} Tests for lowercase or uppercase letter or a digit.
+    \item \textbf{iscntrl():} Tests for control character.
+    \item \textbf{isprint():} Tests for any printing character including space.
+    \item \textbf{isgraph():} Tests for any printing character excluding space.
+    \item \textbf{isdigit():} Tests for a decimal digit: 0 to 9.
+    \item \textbf{isxdigit():} Tests for a hexadecimal digit: 0 to 9, A to F, a to f.
+    \item \textbf{isblank():} Tests for standard blank characters: space, $\backslash$t.
+    \item \textbf{isspace():} Tests for whitespace characters: space, $\backslash$t, $\backslash$n, $\backslash$v, $\backslash$r, $\backslash$f.
+    \item \textbf{ispunct():} Test for printing character for which isspace and isalnum return false.
+\end{itemize}
+
+\subsection{Converting strings}
+
+It is very common to convert character case to all uppercase or all lowercase. \textbf{toupper()} function converts from lowercase to uppercase and \textbf{toloer()} does the contrary. Both functions return either the converted character or the same character for characters that are already in the correct case or are not convertible such as punctuation characters. You have to use them in a loop to analyse and convert each character until reaching the null character. 
+
+You can use them in combination with \textbf{strstr()} to search in a string without considering if the word is in uppercase or lowercase.
+
+To convert strings to numbers, the following functions for the stdlib.h header file are used:
+\begin{itemize}
+    \item \textbf{atof:} A value of type double that is produced from the string argument. Infinity as a double value is recognised from the strings INF or INFINITY and not a number from the string NAN, all of them in lowercase or uppercase.
+    \item \textbf{atoi:} A value of type int that is produced from the string argument.
+    \item \textbf{atol:} A value of type long that is produced from the string argument.
+    \item \textbf{atoll:} A value of type long long that is produced from the string argument.
+    \item \textbf{strtod:} A value of type double is produced from the initial part of the string specified by the first argument. The second argument is a point to a variable, ptr, of type char* in which the function will store the address of the first character following the substring that was converted to the double value. If no string was found that could be converted to type double, the variable ptr will contain the address passed as the first argument.
+    \item \textbf{strtof():} Equal to \textbf{strtod}, but produces a value of type float.
+    \item \textbf{strtold():} Equal to \textbf{strtod}, but produces a value of type long double.
+\end{itemize}

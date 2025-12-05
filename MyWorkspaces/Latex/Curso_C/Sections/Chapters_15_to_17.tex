@@ -1,0 +1,731 @@
+\section{Dynamic Memory Allocation}
+
+\subsection{Overview}
+
+Whenever you define a variable in C, the compiler automatically allocates the correct amount of storage for you based on the data type. It is frequently desirable to be able to dynamically allocate storage while a programme is running. If you have a programme that is designed to read in a set of data from a file into an array in memory, you have three choices:
+\begin{itemize}
+    \item Define the array to contain the maximum number of possible elements at compile time.
+    \item Use a variable-length array to dimension the size of the array at runtime.
+    \item Allocate the array dynamically using one of the C memory allocation routines.
+\end{itemize}
+
+The first approach is a fixed size. The data file cannot contain more than the elements that you select. No matter what value you select, you always have the possibility of running into the same problem again.
+
+Using the dynamic memory allocation functions, you can get storage as you need it. This approach allows you to allocate memory while the programme is running.
+
+Depends on the concept of a pointer and provides a strong incentive to use pointers in your code. The majority of production programmes will use dynamic memory allocation. It allows you to create pointers at runtime that are just large enough to hold the amount of data that you require for the task.
+
+Dynamic memory allocation reserves space in a memory area called the heap, where you can arbitrarily change the occupied memory. The stack is another place where memory is allocated, function arguments and local variables are stored here. When the execution of a function ends, the space allocated in the stack for arguments and local variables is freed.
+
+The memory in the heap is different because it is controlled by you. When you allocate memory on the heap, it is up to you to keep track of when the memory you have allocated is no longer required. You must free the space you have allocated to allow it to be reused.
+
+\subsection{malloc calloc and realloc}
+
+\subsubsection{malloc()}
+
+The simplest standard library function that allocates memory at runtime is called \textbf{malloc()}. You need to include the stdlib.h header file. You specify the number of bytes of memory that you want allocated as the argument. Returns the address of the first byte of memory that is allocated. Because you get an address returned, a pointer is the only place to put it. Example:
+
+\textbf{int *pNumber = (int*)malloc(100);}
+
+In the above, you have requested 100 bytes of memory and assigned the address of this memory block to pNumber. pNumber will point to the first int location at the beginning of the 100 bytes that were allocated. It assumes that type int requires 4 bytes and that it can hold 25 int values. Is better to remove any assumption of this type and write it:
+
+\textbf{int *pNumber = (int*)malloc(25*sizeof(int));}
+
+The cast (int*) converts the address returned by the function to the type pointer to int. \textbf{malloc()} returns a pointer of type pointer to void, so you have to cast it.
+
+You can request any number of bytes. \textbf{malloc()} returns a pointer with the value NULL. It is always a good idea to check any dynamic memory request immediately using an if statement to make sure the memory is actually there before you try to use it:
+
+\textbf{if(!pNumber)} // code to deal with memoty allocation failure
+
+You can least display a message and terminate the programme, is much better than allowing the programme to continue and crash when using a NULL address to store something.
+
+When you allocate memory dynamically, you should always release the memory when it is no longer required. Memory that you allocate on the heap will be automatically released when your programme ends, but it is better to explicitly release the memory when you are done with it, even if it is just before you exit from a programme.
+
+A memory leak occurs when you allocate some memory dynamically and do not retain the reference to it, so you are unable to release the memory. It often occurs in loops. Because yo do not release the memory when is no longer required, the programme consumes more and more of the available memory in each loop iteration and eventually occupy it all. 
+
+To free the memory that you have allocated dynamically, you must still have access to the address that references the block of memory.
+
+To release the memory for a block of dynamically allocated memory whose address you have stores in a pointer:
+
+\textbf{free(pNumber);}
+
+\textbf{pNumber = NULL;}
+
+The \textbf{free()} function has a formal parameter of type void*, so you can pass a pointer of any type as argument. As long as pNUmber contains the address that was returned when the memory was allocated, the entire block of memory will be freed for further use. You should always set the pointer to NULL after the memory to which it points has been freed.
+
+\subsubsection{calloc()}
+
+The \textbf{calloc()} function offers a couple of advantages over \textbf{malloc()}: it allocates memory as a number of elements of a given size and initialises the memory that is allocated so that all bytes are zero. The function is declares in the stdlib.h header file.
+
+\textbf{calloc()} function requires two argument values: number of data items for which space is required and size of data item:
+
+\textbf{int *pNumber = (int*)calloc(75, sizeof(int));}
+
+Creates a memory block reserved to pNumber of 75 elements.
+
+The return value will be NULL if it was not possible to allocate the memory requested. Is very similar to \textbf{malloc()}, but with the big advantage that you know the memory area will be initialised to 0.
+
+\subsubsection{realloc()}
+
+\textbf{realloc()} function enables you to reuse or extend memory that you previosuly allocated using \textbf{malloc()} or \textbf{calloc()}. It expects two argument values: a pointer containing an address that was previously returned by a call to \textbf{malloc()} or \textbf{calloc()} and the size in bytes of the new memory that you want allocated.
+
+\textbf{realloc()} allocates the amount of memory specified by the second argument, transfering the contents of the previously allocated memory referenced by the pointer that you supply as the first argument to the newly allocated memory. It returns a void* pointer to the new memory or NULL if the operation fails for some reason.
+
+The most important feature of this operation is that this function preserves the contents of the original memory area.
+
+\subsubsection{Guidelines}
+
+Avoid allocations of lots of small amounts of memory: allocating memory on the heap carries some overhead with it. Allocating many small blocks of memory will carry much more overhead than allocating fewer larger blocks.
+
+Only hang on to the memory as long as you need it, as soon as you are finished with a block of memory of the heap, release the memory.
+
+Always ensure that you provide for releasing memoty that you have allocated. Decide where in your code you will release the memory when you write the code that allocates it.
+
+Make sure you do not inadvertently overwrite the address of memory you have allocated on the heap before you have released it, this will cause a memory leak. Be especially careful when allocating memory within a loop.
+
+\subsection{Challenge Dynamic memory}
+
+Write a programme that allows a user to input a text string. The programme will print the text inputted. The programme will utilise dynamic memory allocation.
+
+The user can enter the limit of the string they are entering. You can use this limit when invoking malloc. 
+
+The programme should create a char pointer only, no character arrays.
+
+Be sure to release the memory that was allocated.
+
+The solution is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//15_Dynamic_memory_allocation/DynamicMemoryChallenge.png}
+    \caption{Dynamic memory challenge solution}
+    \label{fig:enter-label}
+\end{figure}
+
+\section{Structures}
+
+\subsection{Creating and Using structures}
+
+Structures in C provide another tool for grouping elements together.
+
+Suppose you want to store a date inside the programme, we could create variables for month, day and year to store the date. If also needs to store the date of purchase of a particular item, you must keep track of other three variables for each date that you use. These variables are logically related and should be grouped together. 
+
+It would be much better to group these sets of three variables together. This is what structures in C allow you to do.
+
+A structure declaration describes how a structure is put together, what elements are inside. The struct keyword enables to define a collection of variables of various types called a structure that you can treat as a single unit:
+
+\textbf{struct date}
+
+\textbf{\{}
+
+\textbf{int day;}
+
+\textbf{int month;}
+
+\textbf{int year;}
+
+\textbf{\ ;}
+
+The above statement defines what a date structure looks like to the C compiler. There is no memory allocation for this declaration. 
+
+The variable names within the date structure: month, day, year, are called members or fields. The members of the structure appear between the braces that follow the struct tag name date.
+
+The definition of a date defines a new type in the language. Variables can now be declared to be of type struct date.
+
+\textbf{struct date today;}
+
+The above statement declares a variable to be of type struct date. Memory is now allocated for the variable above for the three integer members per variable. 
+
+There is a difference between defining a structure and declaring variables of the structure type.
+
+To access the members of a structure, you need a special syntax. A structure variable name is not a pointer. You refer to a member of a structure by writing the variable name followed by a period, followed by the member variable name. The period is called the member selection operator. There are no spaces between the variable name, the period, and the member name. To set the value to the day in the variable today to 25:
+
+\textbf{today.day = 25;}
+
+\textbf{today.year = 2015;}
+
+When it comes to the evaluation of the expressions, structure members follow the same rules as ordinary variables do:
+
+\textbf{century = today.year/100 + 1;}
+
+An integer structure member divided by an integer is performed as an integer division.
+
+You do have some flexibility in defining a structure; it is valid to declare a variable to be of a particular structure type at the same type that the structure is defined by including the variable name or names before the terminating semicolon of the structure definition: 
+
+\textbf{struct date}
+
+\textbf{\{}
+
+\textbf{int day;}
+
+\textbf{int month;}
+
+\textbf{int year;}
+
+\textbf{\ today;}
+
+This creates a variable named today at the same time the structure is defined, being today a variable of type date. You can also assign initial values to the variables in a normal way.
+
+You also do not have to give a structure a tag name. If all the variables of a particular structure type are defined when the structure is defined, the structure name can be omitted.
+
+\textbf{struct}
+
+\textbf{\{}
+
+\textbf{int day;}
+
+\textbf{int month;}
+
+\textbf{int year;}
+
+\textbf{\ today;}
+
+A disadvantage is that you can no longer define further instances of the structure in another statement. All variables of the structure type you want must be defined in one statement.
+
+Initialising structures is similar to initialising arrays. The elements are listed inside a pair of braces, with each element separated by a comma. The initial values listed inside the curly braces must be constant expressions:
+
+\textbf{struct date today = {7, 2, 2015};}
+
+Just like an array initialisation, fewer values might be listed than are contained in the structure;
+
+\textbf{struct date date1 = {12,10};}
+
+sets date1.day to 12 and date1.month to 10, but gives no initial value to date.year.
+
+You can also specify the member names in the initialisation list, enabling you to initialise the members in any order or only initialise specified members:
+
+\textbf{struct date date1 = {.day = 12, .month = 10};}
+
+You can assign one or more values to a structure in a single statement using compound literals:
+
+\textbf{today = (struct date){25, 9, 2015};}
+
+This statement can appear anywhere on the programme. It is not a declaration statement, the type cast operator is used to tell the compile the type of the expression, the list of values follows the cast and are to be assigned to the members of the structure, in order. They are listed in the same way as if you were initialising a structure variable.
+
+\subsection{Declaring and initialising a structure}
+
+Write a programme that declares a structure and prints out its content. Create an employee structure with 3 members: name(character array), hireDate(int), salary(float). Declare and initialise an instance of an employee type. Read in a second employee from the console and store it in a structure of type employee. Print out the contents of each employee.
+
+The solution is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//16_Structures/CreatingStructure.png}
+    \caption{Declaring a structure solution}
+    \label{fig:declaring_solution}
+\end{figure}
+
+\subsection{Structures and arrays}
+
+You can create multiple structures in the same array. A better method to handle multiple different structures is combining structures and arrays. Declaring an array of structures is like declaring any other kind of array:
+
+\textbf{struct date myDates[10];}
+
+defines an array called myDates which consists of 10 elements. Each element inside the array is defined to be of type struct date.
+
+To identify members of an array of structures, you apply the same rule used for individual structures: follow the structure name with the dot operator and then with the member name. Referencing a particular structure element inside the array is quite natural. For example, to set the second date inside the myDates array to August 8, 1996:
+
+\textbf{myDates[1].day = 8;}
+
+\textbf{myDates[1].month = 8;}
+
+\textbf{myDates[1].year = 1996;}
+
+Initialisation of arrays containing structures is similar to initialisation of multidimensional arrays:
+
+\textbf{struct date myDates[5] = { {12,10,1975}, {30,12,1980}, {15,11,2005}};}
+
+sets the first three dates in the array myDates to 12/10/1975, 30/12/1980 and 15/11/2005.
+
+The inner pair of braces are optional, but they help to the readability.
+
+If you want to initialise just the third element of the array to the specified value:
+
+\textbf{struct date myDates[5] = {[2] = {12,10,1975}};}
+
+To set just the month and day of the second element of the myDates array to 12 and 30:
+
+\textbf{struct date myDates[5] = {[1].month = 12, [1].day = 30};}
+
+It is also possible to define structures that contain arrays as members. The most common use is to set up an array of characters inside a structure. 
+
+Suppose you want to define a structure called month that contains as its members the number of days in the month as well as a three-character abbreviation for the month name.
+
+\textbf{struct month}
+
+\textbf{\{}
+
+\textbf{int numberOfDays;}
+
+\textbf{char name[3];}
+
+\textbf{\};}
+
+THis sets up a month structure that contains an integer member called numberOfDays and a character member called name. Member name is actually an array of three characters.
+
+You can now define a variable to be of type struct month and set the proper field inside aMonth for January:
+
+\textbf{struct month aMonth;}
+
+\textbf{aMonth.numberOfDays = 31;}
+
+\textbf{aMonth.name[0] = 'J';}
+
+\textbf{aMonth.name[1] = 'a';}
+
+\textbf{aMonth.name[2] = 'n';}
+
+Another way is:
+
+\textbf{struct month aMonth = {31, {'J','a','n'}};}
+
+\subsection{Nested structures}
+
+C allows to define a structure that itself contains other structures as one or more of its members. You have seen how it is posisble to logically group the month, day and year into a structure called date. How about grouping the hours, minutes and seconds into a structure called name:
+
+\textbf{struct time}
+
+\textbf{\{}
+
+\textbf{int hours;}
+
+\textbf{int minutes;}
+
+\textbf{int seconds;}
+
+\textbf{\ ;}
+
+In some applications you may need to group both a date and a time together. You want a convenient way to associate both the date and the time together. You can define a new structure called, for example, dateAndTime, which contains as its members two elements: date and time.
+
+\textbf{struct dateAndTime}
+
+\textbf{\{}
+
+\textbf{struct date sdate;}
+
+\textbf{struct time stime;}
+
+\textbf{\ ;}
+
+The first member of this structure is of type struct date and is called sdate. The second member is of type struct time and is called stime. Variable can now be defined to be of type struct dateAndTime:
+
+\textbf{struct dateAndTime event;}
+
+To reference the date structure of the variable event, the syntax is the same as referencing any member:
+
+\textbf{event.sdate}
+
+To reference a particular member inside one of these structures, a period followed by the member name is tacked on the end. The below statement sets the month of the date structure contained within event to October and adds one to the seconds contained within the time structure:
+
+\textbf{event.sdate.month = 10;}
+
+\textbf{++event.stime.seconds;}
+
+The event variable can be initialised like normal structures. To set the date in the variable event to February 1 2015 and the time to 3:30:00:
+
+\textbf{struct dateAndTime event = {{2,1,2015},{3,30,0}};}
+
+You can use member names in the initialisation:
+
+\textbf{struct dateAndTime event = {{.month = 2, .day = 1, .year = 2015}, {.hour = 3, .minutes = 30, .seconds = 0}};}
+
+It is also possible to set up and array of dateAndTime structures:
+
+\textbf{struct dateAndTime events[100];}
+
+The array events is declared to contain 100 elements of type struct dateAndTime. The fourth dateAndTime contained within the array is referenced in the usual way as events[3]. To set the first time in the array to noon:
+
+\textbf{events[0].stime.hour = 12;}
+
+\textbf{events[0].stime.minutes = 0;}
+
+\textbf{events[0].stime.seconds = 0;}
+
+You can define the Date structure within the time structure definition. The limitation is that the date structure can be used only inside the time structure, date would not exist outside the time structure.
+
+\subsection{Structures and pointers}
+
+C allows for pointers to structure. Pointers to structures are easier to manipulate than structures themselves. In older implementations, a structure cannot be passed as an argument to a function, but a pointer to a structure can. Even if you can pass a structure as an argument, passing a pointer is more efficient. Many data representations use structures containing pointers to other structures.
+
+You can define a variable to be a pointer to struct as:
+
+\textbf{struct date *datePtr;}
+
+The variable datePtr can be assigned just like other pointers:
+
+\textbf{datePtr = \&todaysDate;}
+
+You can then indirectly access any of the members of the date structure pointed to by datePtr:
+
+\textbf{(*datePtr).day = 21;}
+
+The above has the effect of setting the day of the date structure pointed to by datePtr to 21. Parentheses are required because the structure member operator . has higher precedence than the indirection operator *. It would try to access the data from a NULL pointer, essentially.
+
+To test the value of month stored in the date structure pointed to by datePtr:
+
+\textbf{if ((*datePtr).month == 12)}
+
+Pointers to structures are so often used in C that a special operator exists. The structure pointer operator -$>$, which is the dash followed by the greater than sign permits
+
+\textbf{(*x).y;}
+
+to be more clearly expressed as:
+
+\textbf{x-$>$y;}
+
+And the previous if statement can be conveniently written as:
+
+\textbf{if (datePtr-$>$month == 12)}
+
+A pointer can also be a member of the structure:
+
+\textbf{struct intPtrs}
+
+\textbf{\{}
+
+\textbf{int *p1;}
+
+\textbf{int *p2;}
+
+\textbf{\ ;}
+
+A structure called intPtrs is defined to contain two integer pointers, the first one called p1 and the second one called p2. You can now define a variable of type struct intPtrs:
+
+\textbf{struct intPtrs pointers;}
+
+The variable pointers can now be used just like other structs. pointers itself is not a pointer, but a structure variable that has two pointers as its members. 
+
+You can do both structures of characters arrays or characters pointers. The pointers in a character struct should be used only to manage strings that were created and allocated elsewhere in the programme because the declaration of a structure of pointers to char do not allocate memory in the programme for the char arrays.
+
+One instance in which it does make sense to use a pointer in a structure to handle a string is if you are dynamically allocating that memory, using a pointer to store the address. It has the advantage that you can ask \textbf{malloc()} to allocate just the amount of space that is necessary for a string.
+
+The strings of pointers are not stored in a structure, they are stored in the chunk of memory managed by \textbf{malloc()}, The addresses of the two strings that are stores in the structure. Addresses are what string-handling functions typically work with.
+
+\subsection{Structures and functions}
+
+After declaring a structure, you can pass it as an argument to a function. The declaration of a function with an input structure would be: \textbf{bool siblings (struct Family member 1, struct Family member2)}. You would pass two structures of type Family as parameters: member 1 and member 2.
+
+You should use a pointer to a structure as an argument. It can take quite a bit of time to cpy large structures as arguments, as well as requiring whatever amount of memory to store the copy of the structure. Pointers to structures avoid the memory consumption and the copying time (only a copy of the pointer argument is made). Example: \textbf{bool siblings (srutc Family *pmember1, struct Family *pmember2)}.
+
+You can also use the const modifier to not allow any modification of the members of the struct (what the struct is pointing to): \textbf{bool siblings (Family const *pmember1, Family const *pmember2}.
+
+You can use the const modifier to not allow any modification of the pointers address. Any attempt to change those structures will cause an error messahe during compilation, but it will be redundant since you are passing an address to the function: \textbf{bool siblings (Family *const pmember1, Family *const pmember2}. The indirection operator is now in front of the const keyword, not in front of the parameter name. You cannot modify the addresses stored in the pointer, they are the pointers who are protected here, not the structures to which they point to.
+
+The function prototype must indicate the return value in the normal way: \textbf{struct Date my\_fun(void);}. This is a prototype for a function that takes no arguments that returns a structure of type Date. It is often more convenient to return a pointer to a structure. When returning a pointer to a structure, it should be created on the heap.
+
+You should always use pointers when passing structures of a function. In older versions on C, passing a structure may cause errors, passing a pointer will never be problematic. However, you have less protection for your data. SOme operations in the function could inadvertently affect data in the original structure. Use const qualifier solves the problem. 
+
+Advantages of passing structures as arguments: the function works with copies of the original data, which is safer than working with the original data; and the programming style tends to be clearer. 
+
+Disadvantages of passing structures as arguments: older implementations might not handle the code, wastes time ans space, specially wasteful to pass large structures to a function that uses only one or two members of the structure.
+
+Programmers use structure pointers as function arguments for reasons of efficiency and use const when necessary. Passing structures by value is most often done for structures that are small.
+
+\subsection{Challenge Structures pointers and functions}
+
+Write a C programme that creates a structure pointer and passes it to a function. The structure name is item, with the following members: itemName (pointer), quantity (int), price (float), amount (float, stores quantity* price).
+
+Create a function named readItem that takes a structure pointer of type item as a parameter. This function should read in from the user a product name, price and quantity. The contents read in should be stored in the passed in structure to the function.
+
+Create a function named print that takes as a parameter a structure pointer of type item and prints its content.
+
+The main function should declare an item and a pointer to the item. You will need to allocate memory for the itenName pointer. THe item pointer should be passed into both the read and print item functions.
+
+The solution is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//16_Structures/ChallengeStructurePointers1.png}
+    \caption{Challenge Structure Pointers 1}
+    \label{fig:challenge_structure_pointers_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//16_Structures/ChallengeStructurePointers2.png}
+    \caption{Challenge Structure Pointers 2}
+    \label{fig:challenge_structure_pointers_2}
+\end{figure}
+
+\section{File Input and Output}
+
+\subsection{Overview}
+
+All data that the previous programmes accessed was through memory. The scope and variety of applications you can create are limited.
+
+All serious business require more data than would fit into main memory. Also depend on the ability to process data that is persistent and stored on an external device.
+
+C provides many functions in the header file stdio.h for writing to and reading from external devices. The external device you would use for storing and retrieving data is typically a disk drive. However, the library will work with virtually any external storage device.
+
+With all the examples up to now, any data the user enters is lost once the programme ends. If the user wants to run the programme with the same data, he must enter it again each time, wichi is very inconvenient and limits programming. This is referred to as volatile memory.
+
+Programmes usually need to store data on permanent storage, non-volatile, that continues to be maintained after your computer is turned off. A file can store non-volatile data and is usually stored on a disk or a solid state device, a named section of storage. stdio.h is a file containing useful information.
+
+C views a file as a continuous sequence of bytes, each bite can be read individually. It corresponds to the file structure in the Unix environment. A file has a beginning and an end, and a current position (defined as so many bytes from the beginning). You can move the current position to any point in the file (even the end).
+
+There are two types of writing data to a stream that represents a file: text and binary. 
+
+Text data is written as a sequence of characters organised as lines (each line ends with a new line). Binary data is written as a series of bytes exactly as they appear in memory, representing image data or music encoding among others, not readable. You can write any data you like to a file, once written, the file just consists of a series of bytes. 
+
+You have to understand the format of the file in order to read it: a sequence of 12 bytes in a binary file could be 12 characters, 12 8-bit signed integers, 12 8-bit unsigned integers, etc. In binary mode, each and every byte of the file is accessible.
+
+C programmes automatically open three files on your behalf: standard input (the normal input device for your system, usually your keyboard), standard output (usually your display screen) and standard error (usually your display screen).
+
+Standard input is the file that is read by \textbf{getchar()} and \textbf{scanf()}. Standard output is used by \textbf{putchar()}, \textbf{puts()} and \textbf{printf()}. Redirection causes other files to be recognised as the standard input or standard output. The purpose of the standard error output file is to provide a logically distinct place to send error messages.
+
+A stream is an abstract representation of any external source or destination for data. The keyboard, the command line on your display, and files on a disk are all examples of things you can work with the streams. The C library provides functions for reading and writing to or from data streams. You use the same input/output functions for reading and writing any external device that is mapped to a stream.
+
+\subsection{Accessing files}
+
+Files on disk have a name and the rules for naming files are determined by your operating system. You may have to adjust the names depending on your OS. 
+
+A programme references a file through a file pointer (or stream pointer, since it works in more than a file). You associate a file pointer with a file programmatically when the programme is running. Pointers can be reused to point to different file on different occasions.
+
+A file pointer points to a struct of type FILE that represents a stream. It contains information about the file: whether you want to read or write or update the file, the address of the buffer in memory to be used for data and a pointer to the current position in the file for the next operation. This is all set through input/output file operations.
+
+If you want to use several files simultaneously in a programme, you need a separate file pointer for each file. There is a limit to the number of files that you can open at one time, defined as FOPEN\_MAX in stdio.h.
+
+You associate a specific external file with an internal file pointer file variable through a process referred to as opening a file, via the \textbf{fopen()} function. It returns the file pointer for a specific external file. This function is defined in stdio.h. The structure is:
+
+\textbf{FILE *fopen(const char * restrict name, const char * restrict mode);}
+
+The first argument is a pointer to a string that is the name of the external file you want to process. You can specify the name explicitly or use a char pointer that contains the address of the character string that defines the file name. You can obtain the file name through the command line, as input from the user, or defined as a constant in your programme.
+
+If you do not specify the path, the file must be in the workspace main folder.
+
+The second argument is a character string that represents the file mode, it specifies what you want to do with the file. Is a character string between double quotes.
+
+Assuming the call to \textbf{fopen()} is successful, the function returns a pointer of type FILE* that you can use to reference the file in further input/output operations using other functions in the library. If the file cannot be opened for some reason, it returns NULL.
+
+The file modes are the following:
+\begin{itemize}
+    \item \textbf{"w":} Open a text file for write operations. If the file exists, its current contents are discarded.
+    \item \textbf{"a":} Open a text file for append operations. It writes at the end of the file.
+    \item \textbf{"r":} Open a text file for read operations. 
+    \item \textbf{"w+":} Open a text file for update (reading and writing) operations. If the file exists, it truncates the contents to zero. If not it creates the file.
+    \item \textbf{"a":} Open a text file for update (reading and writing) operations. It writes at the end of the file if it exists. If not it creates the file.
+    \item \textbf{"r":} Open a text file for update (reading and writing) operations. 
+\end{itemize}
+
+\subsubsection{Write mode}
+
+If you want to write to an existing file with the name myfile.txt:
+
+\textbf{FILE *pfile = NULL;}
+
+\textbf{char *filename = "myfile.text.";}
+
+\textbf{pfile = fopen(filename, "w");} // Open myfile.txt to write it
+
+This opens the file and associates the file with the name myfile.txt with your file pointer pfile. The mode "w" means that you can only write to the file, not read it. If myfile.txt does not exist, the function will create a new file with this name. If you only provide the file name without any path specification, the file is assumed to be in the current directory. You can also specify a string that is the full path and name for the file.
+
+On opening a file for writing, the file length is truncated to zero, and the position will be at the beginning of any existing data for the first operation. Any data that was previously written to the file will be lost and overwritten by any write operations.
+
+\subsubsection{Append mode}
+
+If you want to add to an existing file rather than overwrite it, specify mode "a", the append mode. This positions the file at the end of any previously written data or creates a new file if it does not exist. Example:
+
+\textbf{pFile = fopen("myfile.txt","a");}
+
+Do not forget that you should test the return value for null each time. When you open a file in append mode, all write operations will be at the end of the data in the file on each write operation; and all write operations append data to the file and you cannot update the existing contents in this mode.
+
+\subsubsection{Read mode}
+
+If you want to read a file, open it with mode argument "r", you cannot write to this file. Example:
+
+\textbf{pFile = fopen("myfile.txt","r")}
+
+This positions the file to the beginning of the data. If you are going to read the file, it must already exist. If you try to open a file for reading that does not exist, it will return a NULL file pointer, so you always want to check the value returned from \textbf{fopen()}.
+
+\subsubsection{Renaming a file}
+
+Renaming a file is very easy using the \textbf{rename()} function:
+
+\textbf{int rename(const char *oldname, const char *newname);}
+
+The integer that is returned will be 0 if the name change was successful and nonzero otherwise. The file must not be opened when you call \textbf{rename()}, otherwise the operation will fail. If the file path is incorrect or the file does not exist, the renaming operation will fail.
+
+\subsubsection{Closing a file}
+
+When you have finished with a file, you need to tell the OS that it can free up the file using the \textbf{fclose()}.
+
+\textbf{fclose()} accepts a file pointer as an argument. It returns EOF(int) if an error occurs. EOF is a special character called the End-Of-File character. It is defined in stdio.h as a negative integer, usually -1. If it is successful, returns 0. Example:
+
+\textbf{fclose(pfile);} // Close the associated file with pfile.
+
+The result is that the connection between the pointer, pfile and the physical file is broken, pfile is no longer able to access the file. If the file was being eritten, the current outputs of the output buffer are written to the file to ensure that data is not lost. 
+
+Is a good programming practice to close a file as sson as you have finished with it, it protects against output data loss. You must also close a file before attempting to rename it or remove it.
+
+\subsubsection{Deleting a file}
+
+You can delete a file by invoking the \textbf{remove()} function, declared in stdio.h:
+
+\textbf{remove("myfile.txt")}
+
+This will delete the file myfile.txt from the current directory. It cannot be opened when you try to delete it. You should always double check with operations that delete files, you could wreck your system if you do not.
+
+\subsection{Reading from a file}
+
+The \textbf{fgetc()} function reads a character from a text file thas has been previously opened for reading. Takes a file pointer as its only argument and returns the character read as type int:
+
+\textbf{int mchar = fgetc(pfile);} // Reads a character into mchar with pfile a File pointer
+
+The mchar is type int because EOF will be returned if the end of the file has been reached. 
+
+The function \textbf{getc()} is also available, requires an argument of type FILE* and returns the character read as type int. It is identical to \textbf{fgetc()} but it can be implemented as a macro, whereas \textbf{fgetc()} is a function.
+
+You can read the contents of a file again when necessary with the \textbf{rewind()} function, that positions the file specified by the file pointer argument at the beginning:
+
+\textbf{rewind(pfile);}
+
+You can use the \textbf{fgets()} function to read from any file or stream:
+
+\textbf{char *fgets(char *str, int nchars, FILE *stream)}
+
+The function reads a string into the memory area pointed to by str, from the file specified by stream. Characters are read until either a null character is read or nchars-1 characters have been read from the stream, whichever occurs first. 
+
+If a newline is read, it is retained in the string, a $\backslash$0 character will be appended to the end of the string. If there is no error \textbf{fgets()}returns the pointer, str. If there is an error NULL is returned. Reading EOF causes NULL to be returned. 
+
+You can get formatted input from a file by using the standard \textbf{fscanf()} function.
+
+\textbf{int fscanf(FILE *stream, const char *format, ...)};
+
+The first argument to this function is the pointer to a FILE object that identifies the stream. The second argument is the format: a C string that contains one or more of the following items: whitespace character, non-whitespace character, format specifiers. The usage is similar to scanf, but from a file.
+
+The function returns the number of input items successfully matcjed and assigned.
+
+\subsection{Challenge Find number of lines}
+
+Write a programme to find the total numbers of lines in a text file. Create a file that contains some lines of text. Open your test file, use the fgetc function to parse characters in a file until you get to the EOF. If EOF, increment counter. Display as output the total numbers of lines in the file.
+
+The solution is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//17_Input_Output/FindNumberLines.png}
+    \caption{Find Number of lines solution}
+    \label{fig:find_number_lines_solution}
+\end{figure}
+
+\subsection{Writing to a file}
+
+The simplest write operation is provided by the function \textbf{fputc()}, that writes a single character to a text file:
+
+\textbf{int fputc(int ch, FILE *pfile);}
+
+The function writes the character specified by the first argument to the file identified by the second argument (file pointer). It returns the character that was written if successful or EOF if failure.
+
+In practice, characters are not usually written to a physical file one by one, it is extremely inefficient. The \textbf{putc()} function is equivalent to this function, with the same arguments and return type, but can be implemented as a macro, whereas \textbf{fputc()} is a function.
+
+You can use the \textbf{fputs()} function to write to any file or stream:
+
+\textbf{int fputs(const char *str, FILE *pfile)}
+
+The first argument is a pointer to the character string that is to be written to the file and the second argument the file pointer. This function will write characters from a string until it reaches the $\backslash$0 character. However, it does not write this character to the file, which can complicate reading back variable-length strings from a file that has been written by \textbf{fputs()}. It expects to write a line of text that has a new line character at the end.
+
+The standard function for formatted output to a stram is \textbf{fprintf()}.
+
+\textbf{int fprintf(FILE *stream, const char *format,...)}
+
+The first argument for this function is a pointer to a FILE object that identifies the stream. The second argument is the format: a C string that contains one or more of the following items: whitespace character, non-whitespace character, format specifiers. The usage is similar to scanf, but from a file. If successful, the total number of characters written is returned; otherwise, a negative number is returned.
+
+\subsection{Convert characters in a file to uppercase}
+
+Write a programme that converts all characters of a file to uppercase and write the results to a temporary file. Then rename the temporary file to the original filename and remove the temporary filename. Use the fgetc and fputc functions. Use the rename and remove functions. Use the islower function, you can convert a character to uppercase by subtracting 32 from it. Display the contents in uppercase to standard output.
+
+The solution is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//17_Input_Output/SolutionConvertUppercase1.png}
+    \caption{Challenge Convert characters to Uppercase Solution 1}
+    \label{fig:Convert_characters_uppercase_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//17_Input_Output/SolutionConvertUppercase2.png}
+    \caption{Challenge Convert characters to Uppercase Solution 2}
+    \label{fig:Convert_characters_uppercase_2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//17_Input_Output/SolutionConvertUppercase3.png}
+    \caption{Challenge Convert characters to Uppercase Solution 3}
+    \label{fig:Convert_characters_uppercase_3}
+\end{figure}
+
+\subsection{Finding your position in a File}
+
+For many applications, you will need to access data in a file other than sequential order. There are various functions that you can use to access data in random sequence.
+
+There are two aspects to file positionning: finding out where you are in a file and moving to a given point in file.
+
+You can access a file at a random position regardless of whether you opened the file.
+
+You have two functions to tell you where you are in a file: \textbf{ftell()} and \textbf{fgetpos()}. The first one has the structure:
+
+\textbf{long ftell(FILE *pfile);}
+
+This function accepts a file pointer as an argument and returns a long integer value that specifies the current position in the file. Example:
+
+\textbf{long fpos = ftell(pfile);}
+
+The fpos variable now holds the current position in the file and you can use this to return to this position at any subsequent time. The value is the offset in bytes from the beginning of the file.
+
+\textbf{fgetpos()} is a little more complicated. Its structure is:
+
+\textbf{int fgetpos(FILE *pfile, fpos\_t *position);}
+
+The first parameter is a file pointer. The second parameter is a pointer to a type that is defined in stdio.h, a type that is able to record every position within a file.
+
+\textbf{fgetpos()} is designed to be used with the positioning function \textbf{fsetpos()}. \textbf{fgetpos()} stores the cuttent position and file state information for the file in position and returns 0 if the operation is successful or a nonzero integer value for failure. Example:
+
+\textbf{fpos\_t here;}
+
+\textbf{fgetpos(pfile, \&here);}
+
+In here we have to pass the ampersnad, the address of it, because it is not a pointer. The above records the current file position in the variable here. You must declare a variable of type fpos\_t, but not a pointer of type fpos\_t* because there will not be any memory allocated to store the position data.
+
+As complement to \textbf{ftell()}, you have the \textbf{fseek()} function. Structure:
+
+\textbf{int fseek(FILE *pfile, long offset, int origin);}
+
+The first parameter is a pointer to the file that you are repositioning. The second and third parameters define where you want to go in the file. The second parameter is an offset from a reference point specified by the third parameter. Reference point can be one of three values specified by the predetermined names:
+\begin{itemize}
+    \item \textbf{SEEK\_SET:} defines the beginning of the file.
+    \item \textbf{SEEK\_CUR:} defines the current position in the file.
+    \item \textbf{SEEK\_END:} defines the end of the file.
+\end{itemize}
+
+For a text mode file, the second argument must be a value returned by \textbf{ftell()}. The third argument for text mode files operations must be SEEK\_SET. For text files, all operations with \textbf{fseek()} are performed with reference to the beginning of the file. For binary files, the offset argument is simply a relative byte count. Therefore, it can supply positive or negative values for the offset when the reference point is specified as SEEK\_CUR.
+
+\textbf{fsetpos()} go with \textbf{fgetpos()}. Its structure is:
+
+\textbf{int fsetpos(FILE *pfile, const fpos\_t *position);}
+
+The first parameter is a pointer to the open file. The second is a pointer of the fpos\_t type, the position that is stored at the address was obtained by calling \textbf{fgetpos()}. \textbf{fsetpos()} returns a nonzero value on error and 0 when it succeeds. 
+
+This function is designed to work with a value that is returned by \textbf{fgetpos()}. You can only use it to get to a place in a file that you have been before. \textbf{fseek()} allows you to go to any position just by specifying the appropiate offset.
+
+\subsection{Challenge print contents of file in reverse order}
+
+Write a programme that will print the contents of a file in reverse order. Use the fseek function to seek to the end of the file. Use the ftell function to get the position of the file pointer. Display as output the file in reverse order.
+
+The solution to the challenge is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//17_Input_Output/PrintReverseChallenge1.png}
+    \caption{Challenge print reverse file 1}
+    \label{fig:challenge_print_reverse_file_1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//17_Input_Output/PrintReverseChallenge2.png}
+    \caption{Challenge print reverse file 2}
+    \label{fig:challenge_print_reverse_file_2}
+\end{figure}

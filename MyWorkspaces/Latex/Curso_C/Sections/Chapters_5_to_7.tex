@@ -1,0 +1,689 @@
+\section{Variables and data types}
+
+\subsection{Overview}
+
+The programme needs to store the instructions of the programme and the data it acts upon while the computer is executing it. This information is stored in memory (RAM), whose contents are lost when the computer is turned off. Hard drives store persistent data.
+
+RAM can be think of as an ordered sequence of boxes. The box is full when it represents a 1 and empty when represents a 0. Each box represents a binary digit, 0 or 1 (true and false) and each box is called a bit. 
+
+Bits are grouped into sets of eight (byte). Each byte has been labeled with a number, which is called the address of the byte. The address of a byte uniquely references that byte in the memory of the computer. 
+
+The true power of programmes is the maniputation of data, so we need to understand the data types you can use to create and name variables.
+
+Constants are types of data that do not change and retain their values throughout the life of the programmes.
+
+Variables are types of data that may change or be assigned values as the programme runs. The variables are the names you give to computer memory locarions which are used to store values in a computer programme.
+
+The rules for naming variable sin C are: all names must begin with a letter or underscore (\_) and can be followed by any combination of letters (uppercase or lowercase), underscores or the digits 0-9. Invalid names of variables are: temp\$value (\$ is not a valid character), my flag (spaces are not allowed), 3Jason (it cannot start by a number), int (reserved word).
+
+As has already been said, use meaningful names for the variables, which eases the readability and helps the debug and documentation phases.
+
+A data type represents a type of the data which you can process using your programme: integers, floats, doubles...
+
+Primitive data types are types that are not objects and store all sorts of data. Everything is a primitive data type in C.
+
+Declaring a variable is when you specify the type of variable followed by the variable name. It specifies to the compiler how a particular variable will be used. For example \textbf{int} is used to declare the basic integer variable. First comes int, then the chosen name of the variable and then a semicolon. 
+
+The structure is: \textbf{type-specifier variable-name;}. You can declare more than one variable in one line by separating their names by commas.
+
+C requires all programme variables to be declared before being used in a programme. The declaration creates variables but not provides values for them, which it is done by using the = operator. For example: \textbf{int x;} declares a integer variable named x and \textbf{x = 112;} gives it the value 112.
+
+Initialise a variable means to assign it a starting or initial value. This can be done as part of the declaration by following the variable name with the = operator and the value you want. For example: \textbf{int x = 21;} declares a integer variable x and assign it the value of 21. You can do it to every variable declared in the line: \textbf{int y = 32, z = 14;} or to only some of them: \textbf{int x, z = 94;}. In the last example, only z in initialised. It is best to avoid putting initialised and non-initialised variables in the same declaration statement.
+
+After initialise a variable, you can modify its value.
+
+\subsection{Basic Data types}
+
+The different types of data are used for storing kind of data: integers, nonintegral numerical values, characters. Some examples of basic data types in C are: int, float, double, char and \_Bool. 
+
+The difference between the types is in the amount of memory the occupy and the range of values they can hold. This depend on the computer which is running.
+
+\subsubsection{int}
+
+A type \textbf{int} variable can be used to contain integral values only, without any decimal place. A minus preceding the data type and variable indicates a negative value. It can be positive, negative or zero. If an integer is preceded by a 0x (lowercase or uppercase) the value is expressed in hexadecimal (base 16) notation. Example: \textbf{int rgbColor = 0xFFEF0D}.
+
+No embedded space are allowed between the digits. Values larger than 999 cannot be expressed using commas: 12,000 must be written as 12000.
+
+\subsubsection{float}
+
+A variable of type \textbf{float} can be used for storing floating-point numbers (values containing decimal places).
+
+Floating-point constants can be expressed in scientific notation: \textbf{1.7e4} is the same as 17000.0.
+
+\subsubsection{double}
+
+It is the same type as float, but with roughly twice the precision. It is used when the range provided by a float variable is not enough. It can store twice as many significant digits and most computers represent them by using 64 bits.
+
+All floating point constants are taken as doubles by the C compiler, to express a float constant there must be an f or F at the end of the number: \textbf{12.5f}
+
+\subsubsection{\_Bool}
+
+It can be used to store just the values 0 or 1. It is used for indicating binary choices: yes/no, on/off, true/false...
+
+Are used in programmes that need to indicate a Boolean condition. 0 is used to indicate a false value and 1 indicates a true value. You can give them the values 1/0 and true/false and it is the same.
+
+Another way for declaring boolean variables is to include the head file \textbf{$\mathbf{<}$stdbool.h$\mathbf{>}$} and then you can define boolean variables as \textbf{bool}. For example: \textbf{bool myBoolean = true;} declares a boolean variable called myBoolean with value 1.
+
+\subsubsection{Other data types}
+
+C offers many other integer types, that vary in the range of values and in whether negative numbers can be used. C offers three adjective keywords to modify basic integer type: short, long and unsigned. Short can be used to save memory when only small numbers are needed. Long enables you to use more storage than int and express larger integer values. The type long long may use more storage than long.
+
+This specifiers can be applied to doubles. A long double constant iw written as a floating constant with the letter I or L inmediately followintg: 1.234e+7L.
+
+The unsigned int is used for variables that have only positive values. Its accuracy is extended.
+
+The signed keyword is used with any of the signed types to make your intent explicit: short, short int, signed short, signed short int are all names for the same type.
+
+\subsection{Enums and chars}
+
+\subsubsection{Enums}
+
+\textbf{Enum} is a data type that allows a programmer to define avariable and specify the valid values that can be stores in that variable. For example, you can create a variable named myColor and it can only contains one of the primary colors: red, yellow, blue and no other values.
+
+The first thing is to define the enum type and give it a name: first the keyword enum, then the name of the variable and finally the list of valid identifiers between curly braces. Example: \textbf{enum PrimaryColor \{red, yellow, blue\}}.  
+
+To declare a variable to be of type enum PrimaryColor, you use the enumerated type name, followed by the enumerated type name and the variable list. Example: \textbf{enum PrimaryColor myColor, gregsColor} makes that the variables myColor and gregsColor can only be of the types of PrimaryColor: red, yellow and blue.  
+
+The compiler actually treats enumeration identifiers as integer constant starting in 0. For example if there is an enum month with the list of months, ans a variable of this type is equal to February, the variable will be identifed as 1. You can assign different values to the values. \textbf{enum direction \{up, down, left = 10, right\}} has 4 values up (0 because it is the first), down (1 because it is the second), left (10 because it is specified) and right (11 because it is after the left value).
+
+\subsubsection{Char}
+
+It represents a single character such as the letter 'a', the digit '6' or a semicolon ';'. Character use single quotes to be defined. They can be declared to be unsigned to explicity tell the compiler that a variable is a signed quantity. There are different to strings.
+
+For declaring it, you must type \textbf{char broiled;} and to assign it, there must always be single quotes: \textbf{broiled = 'T';} is valid while \textbf{broiled = T;} it is not valid, since it will think that T is a variable. \textbf{broiled = "T";} will define a string. It can be assigned as a numerical code of the character.
+
+\textbf{Escape characters}
+
+C contains special characters that represent actions: backspacing, going to the next line, making the terminal bell ring... They can be represented by using special symbol sequences called escape sequences.
+
+For example, \textbf{$\backslash$ n} represents a new line. If you define \textbf{char x = '$\backslash$ n'} you define that the command of new line can be represented as an x. The following is a list of escape sequences:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//5_data_types/Escape_sequences.png}
+    \caption{Escape sequences in C}
+    \label{fig:escape_sequences}
+\end{figure}
+
+\subsection{Challenge Enum}
+
+The programme requires to create an enum type named Company with valid values: GOOGLE, FACEBOOK, XEROX, YAHOO, EBAY, MICROSOFT and the programme has to create three variables of the above enum type with values XEROX, GOOGLE and EBAY. The programme should display as output the value of the three variables with each variable separated by a new line. The correct output is the variables XEROS, GOOGLE and EBAY to be displayed as:
+2
+0
+4
+
+The programme that solves the challenge is:
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//5_data_types/Challenge_solution.png}
+    \caption{Challenge Enum solution}
+    \label{fig:challenge_enum_solution}
+\end{figure}
+
+\subsection{Format specifiers}
+
+They are used when displaying variables as output. They specify the type of data of the variable to be displayed. 
+
+The \textbf{printf()} function is the function used to display the variables. Its first argument is the string to be displayed and after that there are optional arguments. Often, along with the character string, you want the value of certain programme variables. The output of the printf function that will be displayed is the character string, and inside it you can include format specifiers to point to the variables you want to display.
+
+The character \% inside the string is a special character recognised by the \textbf{printf()} function. The character that follows the \% specifies the type of value to be displayed. After the string, the following arguments of the \textbf{printf()} function are the variables that correspond to the format specifier. 
+
+The following commands are used for the different types of variables:
+\begin{itemize}
+    \item \%i is used to print a integer variable, or boolean variable (0 or 1).
+    \item \%d is used to print a integer variable, or boolean variable (0 or 1).
+    \item \%f is used to print a float variable.
+    \item \%e is used to print a double variable.
+    \item \%lg is used to print a double variable of different type, without the final decimals number.
+    \item \%c is used to print a character variable.
+\end{itemize}
+
+When printing numbers, you can specify the number of decimal numbers that will the printed number will be rounded to by adding a .3 if you want it rounded to three decimals, .5 if you want it to five...
+
+\subsection{Challenge: Print the rectangle area}
+
+The programme should display the perimeter and area of the rectangle.
+
+It should create 4 double variables: one for width, another for height, another for perimeter and another for area. They should display the variables in the correct format in one print statement. Perimeter and area need to be initialised with 0.0 value and the other two with any values desired. 
+
+The solution is the following:
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures/5_data_types/Rectangle_challenge_solution.png}
+    \caption{Rectangle challenge solution}
+    \label{fig:rectangle_challenge_solution}
+\end{figure}
+
+\subsection{Command line arguments}
+
+There are times when a programme is developed that requires the user to enter a small amount of information at the terminal. There are two ways of handling it: request the data from the user or supply the information at the time the programme is executed.
+
+The main function is the entry point of the programme. When is called by the runtime system, two arguments are passed to the function:
+\begin{itemize}
+    \item \textbf{argc}, the first argument, is an integer that specifies the number of arguments typed on the command line.
+    \item \textbf{argv}, the second argument is an array of character pointers (strings).
+\end{itemize}
+
+An argument is how you can pass data to a function. Basically, you first specify how many arguments the function has and then an array with their values.
+
+The name of the programme is always the first argument of argv, so if not specified otherwise, argc = 1 and argv will have only the name of the programme. 
+
+One way to edit this is by adding arguments through the command line option, which can be done in CodeLite by right-clicking on the project, select settings, go the General and there is an option called program arguments in which you can introduce the arguments desired. The other option is to ask the user to introduce the data. 
+
+\section{Operators}
+
+\subsection{Overview}
+
+Operators are functions that use a symbolic name and perform mathematical or logical functions. Are predefined in C, like in most languages, and tend to be combined with the infix style (5 + 8, prefix style would be 5 8 +).
+
+A logical or Boolean operator is an operator that returns a Boolean result based on the Boolean result of one or two other expressions.
+
+An arithmetic operator is a mathematical function that takes two operand and performa calculation on them.
+
+Other operators include assignment (=), relational ($<, >$,!=), bitwise ($<<,>>,~$).
+
+\subsubsection{Expressions and statements}
+
+Statements are the basic programme steps of C, most statements are constructed from expressions.
+
+An expression is a combination of operators (what an operator operates on, its arguments) and operands (constants, variables or combination of the two types) that always has a value.
+
+Statements are the building blocks of a programme. A programmes is a series of statements with special syntax ending with a semicolon (simple statements) that results in a complete instruction to the computer. There are several types of statements:
+\begin{itemize}
+    \item Declaration statement: \textbf{int Daniel;}.
+    \item Assingnment statement: \textbf{Daniel = 5;}.
+    \item Function call statement: \textbf{printf("Daniel");}.
+    \item Structure statement: \textbf{while(Daniel<20) Daniel = Daniel + 1;}.
+    \item Return statement: \textbf{return 0;}.
+\end{itemize}
+
+C considers any expression to be a statement if it is ended with a semicolon (expression statements).
+
+\subsubsection{Compound statements}
+
+Two or more statements grouped together by enclosing them in braces (block).
+
+Example: 
+\textbf{ int index = 0;
+while (index<10)
+\{ 
+    printf("hello");
+    index = index + 1;
+\}}
+
+\subsection{Basic operators}
+
+In this Subsection, four operators will be discussed: arithmetical, logical, assignment and relational.
+
+A logical or Boolean operator is an operator that returns a Boolean result based on the Boolean result of one or two other expressions.
+
+An arithmetic operator is a mathematical function that takes two operand and performa calculation on them.
+
+An assignment operator set variables equal to values: assigns the value of the expression at its right to the variable at its left.
+
+A relational operator will compare variables against each other.
+
+In the following table the arithmetic operators in C are displayed:
+
+\begin{table}[H]
+    \centering
+    \caption{Arithmetic operators in C}
+    \begin{tabular}{cccc}
+        \textbf{Operator} & \textbf{Description} & \textbf{Example}  \\ \hline \hline
+        + & Adds two operands & A + B = 30 \\
+        - & Substracts two operands & A - B = 10 \\
+        * & Multiplies both operands & A*B = 200 \\
+        \% & Modulus operator and remainder after an integer division & B\%A = 0 \\
+        ++ & Increment the integer value by one & A++ = 11 \\
+        -- & Decrement the integer value by one & A-- = 9 
+    \end{tabular}
+    \label{tab:arithmetic_operators}
+\end{table}
+
+The logical operators are the following:
+\begin{itemize}
+    \item \textbf{\&\&} is the logical AND operator. If both operands are non-zero, the condition becomes true. Example: \textbf{A\&\&B} is false.
+    \item \textbf{$|$$|$} is the logical OR operator. If any of the two operands is non-zero, the condition becomes true. Example: \textbf{A$|$$|$B} is true.
+    \item \textbf{!} is the logical NOT operator. It is used to reverse the logical state of its operand. If a condition is true, this operator will make it false. Example: \textbf{!(A\&\&B)} is true.
+\end{itemize}
+
+The assingment operators are the following:
+\begin{itemize}
+    \item = is the simple assignment operator. Example: C = A + B will assign the value of A + B to C.
+    \item += is the add AND assignment operator. It adds the right operand to the left operand and assigns the result to the left operand. Example: C += A is equivalent to C = C + A.
+    \item -= is the subtract AND assignment operator. It subtracts the right operand from the left operand and assigns the result to the left operand. Example: C -= A is equivalent to C = C - A.
+    \item *= is the multiply AND assignment operator. It multiplies the right operand by the left operand and assigns the result to the left operand. Example: C *= A is equivalent to C = C*A.
+    \item /= is the divide AND assignment operator. It divides the right operand by the left operand and assigns the result to the left operand. Example: C /= A is equivalent to C = C / A.
+    \item \%= is the modulus AND assignment operator. It takes modulus using two operands and assign the result to the left operand. Example: C \%= A is equivalent to C = C\%A.
+\end{itemize}
+
+The shift and bitwise operators can also be assigned like the above operators by adding the  = to the right. Those operators will be seen in depth in future lectures.
+
+The relational operators compare the values of two variables:
+\begin{itemize}
+    \item == Checks if the values of two operands are equal or not. If yes, the condition becomes true.
+    \item != Checks if the values of two operands are equal or not. If yes, the condition becomes false.
+    \item $<$ Checks if the value of the left operand is greater than the value of right operand. If yes, the condition becomes true.
+    \item $>$ Checks if the value of the left operand is less than the value of right operand. If yes, the condition becomes true.
+    \item $<$ Checks if the value of the left operand is greater than or equal to the value of right operand. If yes, the condition becomes true.
+    \item $>$ Checks if the value of the left operand is less than or equal to the value of right operand. If yes, the condition becomes true.
+\end{itemize}
+
+\subsection{Challenge: COnvert minutes to years and days}
+
+This programme must convert the number of minutes to days and years. It should ask the user to enter the number of minutes via the terminal and display as output the minutes and then its equivalent in years and days. The programme should create variables to store: minutes (int), minutes in year (double), years (double), days(double).
+
+The solution is:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//6_Operators/SolutionMinutesChallenge.png}
+    \caption{Solution to the Challenge of converting minutes}
+    \label{fig:solution_challenge_minutes}
+\end{figure}
+
+\subsection{Bitwise operators}
+
+Look similar to the logical operators but are quite different. It operate on the bits in integer values. They are not used in the common programme. One major use are to test and set individual bits in an integer variables, that can be used to store data that involve one of two choices.
+
+For example, you could use a single integer variable to store several characteristics of a person: one for whether the person is female or male, three to specify if can speak French, German and Italian; and another if the salary is \$50000 or more, and in five bits there are a substantial set of data recorded.
+
+\subsubsection{Binary numbers}
+
+A binary number is a number that includes only ones and zeroes. The number could be of any lenght: 1, 0, 1010, 00101001, 1010010101010100010101001111010...
+
+To obtain its decimal value, for each digit you multiply it by its position value and add up all products to get the final result. In general, the posision values are the powers of two. Example: the number 01101001 can be obtained as: (128*0 + 64*1 + 32*1 + 16*0 + 8*1 + 4*0 + 2*0 +1 = 105.
+
+\subsubsection{Bitwise operators}
+
+The bitwise operators are the following:
+\begin{itemize}
+    \item \& Binary AND operator copies a bit to the result if it exists in both operands.
+    \item $|$ Binary OR operator copies a bit if it exists in either operand.
+    \item $\wedge$ Binary XOR operator copies the bit if it exists in one operator but not both.
+    \item ~ Binary Ones Complement operator is unary and flips all the bits of a number.
+    \item $<<$ Binary Left Shift operator. The left operands value is moved to the left by the number of bits specified by the right operand.
+    \item $>>$ Binary Right Shift operator. The left operands value is moved to the right by the number of bits specified by the right operand.
+\end{itemize}
+
+\subsection{Cast and Sizeof operators}
+
+Conversion of data between different types can happen automatically (implicit conversion) by the language or explicit by the programme. To effective develop C programme, you must understand the rules used for the implicit conversion of floating-point and integer values in C.
+
+Normally, the types should not be changed, but there are occasions when it is useful. C is flexible, it gives freedom, but it must not be abused.
+
+Truncated means that the data have been changed to a less precise type and Promoted means that the data have been changed to a more precise type.
+
+When a floating-point value is assigned to an integer variable in C, the decimal portion of the number gets truncated. Assigning an integer to a floating variable does not change the value of the number.
+
+When performing integer arithmetihic:
+\begin{itemize}
+    \item If two operands in an expression are integers, any decimal portion resulting from a division operation is discarded, even if the result is assigned to a floating variable.
+    \item If an operand is an integer and the other a float, the operation is performed as a floating point operation.
+\end{itemize}
+
+\subsubsection{Cast operator}
+
+It is usually much better to perform an explicit conversion through the cast operation. A cast consists on preceding the quantity with the name of the desired type in parentheses. The parenthesis and type name together is the cast operator.
+
+It has a higher precedence than all the arithmetic operator except unary minus and unary plus.
+
+Example: \textbf{(int)21.51 +(int)26.99} is equivalent to 21 + 26 = 47.
+
+\subsubsection{Sizeof operator}
+
+This operator is used to find out how many bytes are occupied in memory by a given type by this operator. Its argument can be a variable, an array name, the name of a basic data type, the name of a derived data type or an expression.
+
+\subsubsection{sizeof(int)} returns the number of bytes occupied by a variable of type int.
+
+It is usually used how much many memory to allocate when using pointers.
+
+It is also used to avoid having to calculate and hard-code sizes into your programme.
+
+\subsubsection{Other operator}
+
+When an asterisk * is used with only one argument it represents a pointer to that variable: *a represents a pointer to the variable a.
+
+? is the ternary operator, an operator used for comparisons. If condition is true ? then value X, otherwise value Y. 
+
+They will be explained in detail when studying pointers.
+
+\subsection{Print the byte size of the basic data types}
+
+The challenge is to create a C programme that displays the byte size of basic data types supported in C. The output will vary depending on the system that runs the programme.
+
+The types must be: int, char, long, long long, double, long double. It must use the sizeof operator.
+
+The solution is:
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//6_Operators/ChallengeSizeof.png}
+    \caption{Challenge of sizeof solution}
+    \label{fig:challenge_sizeof_solution}
+\end{figure}
+
+\subsection{Operator precedence}
+
+Operator precedence decides the order of evaluation in an operation with more than one operator. Certain operators have higher order of preference than others.
+
+C has unambiguous rules for choosing what to do first. For example the multilication has a higher precedence than the addition, so it is performed first. 
+
+You can decide what to execute first; whatever is enclosed in parentheses is executed first.
+
+If two operators have the same precedence level, associativity rules are applied. If ther share an operand, they are executed according to the order in which they occur in the statement. For most operators the order is from left to right.
+
+Operators == and != have the same precedence. The associativity of both parameters is left to right. 1 == 2 != 3 does first the 1==2 operation and then 2!=3. It will return: 1==2 results into 0 (false) then (0!=3) executes resulting into 1 (true).
+
+The next table includes the assignment operators precedence (highest to lowest) and the associativity for each operator:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ccc}
+        \textbf{Category} & \textbf{Operator} & \textbf{Assocativity} \\ \hline \hline
+        Postfix & (),[],-$>$, ., ++, -- & Left to right \\
+        Unary & +!, -!, ~, ++, --, (type), *, \&, sizeof & Right to left \\
+        Multiplicative & *, /, \% & Left to right \\
+        Additive & +, - & Left to right \\
+        Shift & $<<,>>$ & Left to right \\
+        Relational & $<, <=, >, >=$ & Left to right \\
+        Equality & ==, != & Left to right \\
+        Bitwise AND & \& & Left to right \\
+        Bitwise XOR & $\wedge$ & Left to right \\
+        Bitwise OR & $|$ & Left to right \\
+        Logical AND & \&\& & Left to right \\
+        Bitwise OR & $|$$|$ & Left to right \\
+        Conditional & ?: & Right to left \\
+        Assignment & =, +=, *=, /=, \%=, $>>$=, $<<$=, \&=,$\wedge$=,$|$= & Right to left \\
+        Comma & , & Left to Right
+    \end{tabular}
+    \caption{Operators precedence and associativity rules}
+    \label{tab:operators_precedence_associativity}
+\end{table}
+
+The best way of avoiding errors of associativity and precedence is using parenthesis when there are any doubts.
+
+\section{Control Flow}
+
+\subsection{Overview}
+
+Control flow deals with conditional statements and loops. The statements of a programme are generally executed from top to bottom, in order. Control flow statements break up the flow of execution by employing decision-making, looping and branching; enabling your programme to conditionally execute particular blocks of code. The three types of control flow statements are:
+\begin{itemize}
+    \item \textbf{Decision-making statements:} Decides which part of the code runs. if-then, if-then-else, switch, goto.
+    \item \textbf{Looping statements:} Repeat a part of the code a number of times or until a condition is met. for, while, do-while.
+    \item \textbf{Branching statements:} Alterate a decision-making or looping statement. break, continue, return.
+\end{itemize}
+
+\subsubsection{Decision-making}
+
+Structures that requires that the programmer specify one or more conditions to be evaluated or tested by the programme. If a condition is true, a statement or statements are executed. If it is false, other statements are executed.
+
+The types of if statements are:
+\begin{itemize}
+    \item \textbf{if statement:} A boolean expression followed by one or more statements.
+    \item \textbf{if...else statement:} An if statement followed by an optional else statement, executed if the boolean expression is false.
+    \item \textbf{nested if:} You can use one if or else if statements inside another if or else if statements.
+\end{itemize}
+
+\subsubsection{Repeating code}
+
+Structures that execute a block of code multiple times. A loop becomes infinite if a condition never becomes false. The for loop is traditionally used for this purpose.
+
+The types of loops in C are:
+\begin{itemize}
+    \item \textbf{while loop:} Repeats a statement or statements while a given condition is true. It tests the condition before executing the loop body.
+    \item \textbf{for loop:} Executes a sequence of statements multiple times and abbreviates the code that manages the loop variable.
+    \item \textbf{do while loop:} Similar to a while statement, except it tests the condition at the end of the loop body. The main difference to a while is that is guarantees that the loop is entered at least one time.
+    \item \textbf{nested loops:} One or more loops inside another while, for, do while loop.
+\end{itemize}
+
+\subsection{If statements}
+
+As it has been said, is the general decision-makinf in the form of an if statement. The syntax is:
+\textbf{if(expression)
+    programme statement}
+
+It is used to estipulate execution of a programme statement/s based upon specified conditions. The curly brackets are required for compound statemens inside the if block, but are not mandatory if there is only one statement inside the if condition. If there are two or more statements, they are mandatory.
+
+In the if(expression) there are not semicolons at the end, but they must be in the statements of inside it.
+
+The else statement gives more flexibility by adding a second block of code if a boolean expression is false:
+
+\textbf{if(expression)
+    Statement 1
+else
+    Statement 2}
+
+The next statment under the if or the else if they do not have curly brackets must be separated by one blank line to not have any warnings.
+
+The expression must have a relational (with the operators $<, <=, > >=$) or equality (with the operators $==, !=$) statement, a single = never can appear, since it is an assignment, not an expression.
+
+If there is more than one condition or cases for the if, the else if expression can be used. The structure is:
+
+\textbf{if(expression 1)
+    Statement 1
+else if (expression 2)
+    Statement 2
+else
+    Statement 3}
+
+A nested if-else statement means that you can use one if or else if inside another if or else if. The structure is:
+
+\textbf{if(expression 1)
+    \{
+    if (expression 2)
+        Statement 1
+    else
+        Statement 2
+    \}
+else
+    Statement 3
+}
+
+The conditional operator or ternary statement is a unique operator. Most operators are unary or binary operators (one or two operands), but the ternary operator takes three operands. The two symbols used to denote this operatr are the question mark ? and the colon :. The first operand is placed before the ?, the second between the ? and the : and the third after the :. Structure: \textbf{Condition ? expression 1 : expression 2}. The first operand is the boolean condition, the expression 1 is the expression evaluated if true and the expression 2 is the expression evaluated if false. It is a short form to make an if-else statement in which the statements of both conditions are a single statements. It cannot be used if one of the conditions has multiple assignment. 
+
+Example: \textbf{x = y > 7 ? 25 : 50} results in x being set to 25 if y is greater than 7 or to 50 otherwise. Is the same as:
+
+\textbf{if(y$>$7)
+    x = 25;
+else
+    x = 50;}
+
+\subsection{Challenge Amount of pay}
+
+This function should create the weekly pay. The program should ask the user the number of houts worked in a week via the keyboard. The programme should display as output the gross pay, the taxes and the net pay. The following assumptions hould be made:
+\begin{itemize}
+    \item Basic pay rate: \$12.00 per hour.
+    \item Overtime (in excess of 40 hours) = time and a half pay rate.
+    \item Tax rate: 15\% of the first \$300, 20\% of the next \$150 and 25\% the rest.
+\end{itemize}
+
+The solution is:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures//7_Control_Flow/SolutionChallengePay.png}
+    \caption{Solution to the Challenge of Amount of pay}
+    \label{fig:solution_challenge_pay}
+\end{figure}
+
+\subsection{Switch statement}
+
+It is a similar operator to the if-else if, that is specially useful when you want to choose one of several alternatives. It is used when the value of a variable is successively compared against different values, being more convenient and efficient for these cases. You can only use it when comparing the values of a variable to a series of values.
+
+The structure is:
+
+\textbf{switch (expression)}
+
+\{
+
+\textbf{case value 1:}
+
+\textbf{programme statement}
+
+\textbf{break;}
+
+...
+
+\textbf{case value n:}
+
+\textbf{programme statement}
+
+\textbf{break;}
+
+\textbf{default:}
+
+\textbf{programme statement}
+
+...
+
+\textbf{break}
+
+\}
+
+The default case is the else of this statements, if any case studied fulfils the condition, this is the case run.
+
+The expression enclosed within parentheses is successively compared against the values: value 1, value 2, value 3... value n. The cases must be simple constants or constant expressions.
+
+If a case is found whose value is equal to the value of the expression, the statements that follow the case are executed. When more than one statement is included, they do not have to be enclosed within braces.
+
+The break statement signals the end of a particular case and causes the execution of the switch statement to terminate. They must be included at the end of every case; otherwise the switch will keep going to the next cases.
+
+This is a useful statement for the enum variables. See the SwitchExample of the Workspace for an example of how to do a switch with an enum.
+
+\subsubsection{goto statement}
+
+The goto statement is available in C. It has two parts, the goto and a label name. Label is named following the same convention used in naming a variable. It is not liked because it makes hard to read the code and follow where it is going. Example: \textbf{goto part2;}, with part2 being a label of a certain statement. 
+
+A case where it may be useful is when having a lot of loops and you want to jump them for any reason, but it is not recommendable to use it. 
+
+\subsection{For loop}
+
+The loops are a way to repeat a block of code when you need to use the same code repeatedly. The number of time that a loop is repeated can be controlled by a count (repeating the statement block a number of times: counter controlled loop) ot can depend on when a condition is met (for example, until the user enters 'quit').
+
+You typically use of the for loop is to execute a blovk os statements a given number of times. For example, if you want to display the numbers from 1 to 10, instead of writing ten \textbf{prinf()} you would use a for loop.
+
+The syntax of the for loop is:
+
+\textbf{for(int count = 1 ; count $<$= 10 ; ++count)}
+\{
+\textbf{statement}
+\}
+
+As the if statements, if the loop is a single stamement you do not need to use curly brackets, but if there are several statements they are mandatory.
+
+The for loop operation is controlled by what appears between the parentheses that follow the keyword for, separated by semicolons. Theh action that you want to repeat is the block contained between the curly braces.
+
+The general pattern for the for loop is; \textbf{for(StartingCondition ; ContinuationCondition; ActionPerIteration)}.
+
+The starting condition typically (but not always) sets an initial value to a loop control variable. Is typically a counter os some kind that tracks how often the loop has been repeated. It can also declare and initialise several variables of the same type with declarations separated by commas, variables that will be local to the loop and will not exist once the loop ends.
+
+The continuation condition is a logical expression evaluated to true or false that as long as its true, the loop continues. Typically, checks the value of the loop control variable. You can write any logical or arithmethic expression as long as you know what you are doing. THe continuation condition is tested at the beginning of the loop, not at the end. This means that the loop statement will not be executed if the continuation condition is false.
+
+The action per iteration is executed at the end of each loop interation. It is usually an increment or decrement of one or more loop control variables. Several variables may be modifies, just need to use commas to separate.
+
+An example of a loop of several variables: 
+
+\textbf{for (int i=1, j=2; i$<$5, ++i, j = j +2}
+
+    \textbf{printf("\%5d", i$\cdot$j}
+
+The output will be a single line with values 2, 8, 18, 32 and 50.
+
+You have no obligation to put any parameter in the for loop statement: \textbf{for(;;)}, which creates an infinite loop. This is sometimes useful for monitoring data or listening for connections.
+
+\subsection{While and Do-While}
+
+These are mechanisms to repeat a set of statements continuously until a specified logical expression evaluates to true.
+
+The general syntax for the while loop is as follows:
+
+\textbf{while (expression)}
+
+\{
+
+\textbf{statement}
+
+\}
+
+As before, the curly brackets are optional if there is only one statement and mandatory  if there are more than one.
+
+The condition for continuation of the while loop is tested at the start of the loop, so if the expression starts false the loop will not be executed. If the loop condition starts true, the condition must be modified in the inside of the loop.
+
+The do-while is a loop where the body is executed for the first time unconditionally. The condition is at the bottom (post-test loop), so it is always guaranteed to be executed at least once.
+
+The general syntax for the do while loop is as follows:
+
+\textbf{do}
+
+\{
+
+\textbf{statement}
+
+\}\textbf{while (condition)}
+
+TO decide which loop to use, first decide whether you need a pre- or post-test loop. Usually it will be a pre-test loop (for or while), which also makes it easier to read if the condition is at the beginning.
+
+Between a for or a while, you really can do everything that one do with the other. Sometimes, for is a little faster, but there are no differences.
+
+One way of use a while as a for loop is initialise the variable outside the while and include update statements at the end of the loop. 
+
+\subsection{Nested loops}
+
+Sometimes you may want to place one loop inside another. The structure will be:
+
+\textbf{for(StartingCondition1 ; ContinuationCondition1; ActionPerIteration1)}
+\{
+    
+    \textbf{statement1}
+
+    \textbf{for(StartingCondition2 ; ContinuationCondition2; ActionPerIteration2)}
+
+    \{
+
+    \textbf{statment 2}
+
+    \}
+
+    \textbf{statement posterior (optional)}
+
+\}
+
+\subsubsection{Continue statement}
+
+Sometimes a situation arises where you do not want to end a loop but you want to skip the current iteration. This is done by the continue statement inside the body of a loop.
+
+An advantage of using continue is that it can sometimes eliminate nesting or additional blocks of code and can enhance readability when the statements are long or deeply nested.
+
+It is better not to use it if it can worsen the code complexity or readability.
+
+The continue statement is followed by a semicolon.
+
+\subsubsection{Break statement}
+
+The break keyword inside of a loop will cause the loop to end its execution and the programme to get out of the loop. If the break statement is inside a nested loop, it only affects the innermost loop that contains it.
+
+The break statement is followed by a semicolon.
+
+It is often used to leave a loop when there are two separate reasons to leave. 
+
+Break is also used in switch to get out of the switch, the functioning is very similar.
+
+\subsection{Challenge Guess the Number}
+
+The objective is to create the Guess the NUmber programme. Your programme will generate a random number from 0 to 20 and ask the user to guess it. User should only be able to enter numbers from 0 to 20. Then the programme will indicate to the user if each guess is too high or too low. The player wins the game if they can guess the number within five tries.
+
+To generate a random number, the libraries stflib.h and time.h need to be included. Then a time variable must be created: \textbf{time\_t t;} and the random number generator must be initialised: \textbf{srand((unsigned) time(\&t));}. Finally, you get the random number and store it in a variable: \textbf{int randomNumber = rand()\%21;}.
+
+The solution is:
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//7_Control_Flow/SolutionGuessNumber_1.png}
+    \caption{Solution Challenge Guess the Number 1}
+    \label{fig:solution_guess_number_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures/7_Control_Flow/SolutionGuessNumber_2.png}
+    \caption{Solution Challenge Guess the Number 2}
+    \label{fig:solution_guess_number_2}
+\end{figure}

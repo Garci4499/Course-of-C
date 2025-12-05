@@ -26,7 +26,7 @@ int main(){
 
     result = w4 >> 2; // signed right shift 2 places
 
-    printf("%d \n" , result); // 
+    printf("%d \n" , result); // Can give 34 or 226 depending if system itroduces 1s in the begining
 
     return 0;
 }

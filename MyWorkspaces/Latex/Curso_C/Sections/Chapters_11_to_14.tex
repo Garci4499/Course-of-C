@@ -1,0 +1,536 @@
+\section{Debugging}
+
+\subsection{Configuring the Debugger in CodeLite}
+
+To configure the settings of the debugger: Settings -$>$ GDB settings.
+
+If you want to do so for a concrete project: right-click on the project, settings, debugger and in select debugger path include the cygwin64/bin/gdb.exe. 
+
+If that does not work (as it was my case) it is because a general bug of the compiler, so the solution is to install the MinGW debugger. For that, go to winlib.com to the downloads page and download the .zip wherever you want. I extracted it on the disk C. There is a folder named mingw64 that has a bin folder with a gdb executable that will be the debugger used.
+
+To debug a programme, you go to Debugger and select Start/Continue Debugger. The programme will run and stop in the debugging points that you select. To select a line to set a debug point, you can click at the right of the line number or right click in the line and select Add breakpoint.
+
+You always have to set the path to the debugger in every new project that you create in CodeLite. In the tab that is just top of the projects of the workspace, the option debug must be selected.
+
+\subsection{Debugging}
+
+Debugging is the process of finding and fixing errors in a programme, usually logic errors, but can also include compiler and/or syntax errors. For syntax errors, debugging is understand what the compiler is telling you. You must always focus on fixing the first problem of the programme because the following errors may be caused by the previous ones.
+
+Debugging can range in complexity from fixing simple errors to collecting large amounts of data for analysis. The ability to debug is an essential skill (problem solving) that can save you tremendous amounts of time and money.
+
+The maintenance phase is the most expensive phase of the software life cycle, is the phase in which new features are added, and new bugs are found and fixed.
+
+Bugs are unavoidable when programming.
+
+The common problems related to debugging are logic errors (the programme is well written but there is something that makes your code now work as intended), syntax errors (the programme is not well written: semicolon missing for example), memory corruption (there is no address defined for a pointer for example), performance/scalability (the programme works well, but the scale of data that are running makes it run very slow), lack of cohesion (there is features not used or a function or main programme does many things, being better to use functions), and tight coupling (many dependencies among the functions of the code).
+
+The debugging process starts with understanding the problem (sit down with a tester, understand requirements, etc.). Once found, you must reproduce the problem, which sometimes is difficult, as it can be intermittent or only happen in rare circumstances. Parallel processes or threading problems also makes harder to debug the programme. After that, your target must be simplify the problem, by divide and conquer strategies or isolating the source: remove parts of the original test case, comment out code, turn a large programme into a lot of small programmes...
+
+After that, the origin of the problem must be identified in the code, using debugging tools if necessary. There you can check what is happening in the code while running, watching the evolution of the variables, and detecting anomalies. Finally, you must solve the problem, which becomes easier with experience and practice. Sometimes, it includes a redesign or refactoring of the code. And finally, a lot of tests to check that the programme works for all possible cases are done.
+
+Some useful techniques and tools are, for example, tracing and using print statements, giving the output values of variables at certain points of a programme, which shows the execution flow and can help isolate the error. Debuggers are other tools adequate for debugging, as has already been commented on. Other option is the use a log file. Finally, there are monitoring softwares that run-time analysis of memory usage, network traffic, thread, and object information.
+
+The exception handling helps a lot to identify catastrophic errors, but C has no features related to this. Static analysers analyse the source code for a specific set of known problems. They are semantic checkers; they do not analyse syntax. They can detect things like uninitialised variables, memory leaks, unreachable code, deadlocks, or race conditions. Test suites run a set of comprehensive end-to-end system tests. Finally, analysing the call stack and memory dump helps to understand what and where happened when the programme crashed.
+
+Preventing errors is better than debugging them. It is useful to write high-quality code, following good design principles and good programming practices. Unit tests are automatically executed when compiling. They help to avoid regression and find errors in new code before it is delivered. This is called Test Driven Development; you write the code in order to pass the tests. Besides, providing good documentation and proper planning reduces the number of errors committed. Finally, working in steps and constantly testing after each step helps reduce the errors.
+
+\subsection{Understanding the Call Stack}
+
+A stack trace or call stack is generated whenever your application crashes due to a fatal error. Shows a list of the function calls that lead to the error: includes the filenames and line numbers of the code that cause the error. At the top of the stacks there is the last call that caused the error, and at the bottom there is the first call that started the chain of calls that caused the error. You need to find the call in your application that causes the crash. A programme can also dump the stack trace. You can access the call stack via the CodeLite menu when using the debugger.
+
+After setting a breakpoint and run the debugger, when the programme stops at the right bottom the debugging menu appears. There, one of the options is Call Stack. There, there is a series of functions, depending on where the programme has stopped, the file where are located, the line in which are stopped and the memory address related. It shows the order of the functions that are being called in the line in which you are stopped.
+
+\subsection{CodeLite Debugger}
+
+Before using the debugger, the project settings -$>$ Debugger, and the compiler setting must be configured correctly. 
+
+A breakpoint is something you set in the programme to temporarily stop its execution in a certain line and access the information that the programme has at that point: variable values, for example. To use the debugger, there must be at least one breakpoint set. 
+
+The debugger options are the following:
+\begin{itemize}
+    \item \textbf{Locals:} Local variables at the breakpoint location.
+    \item \textbf{Watches:} They cna be put on variables and they will pop up if that variable changes its value.
+    \item \textbf{Output:} To print information while the programme is at the breakpoint.
+    \item \textbf{Threads:} To look at the threads followed by the programme.
+    \item \textbf{Call Stack:} See above.
+    \item \textbf{Memory:} To see information about the memory locations.
+    \item \textbf{Breakpoints:} To see the breakpoints of the programme.
+\end{itemize}
+
+The most important ones are local and breakpoints, they will be the most used.
+
+Also, at the top of the programme, there is the debugger toolbar. The play is for continuing the programme, the stop is for stop the execution, the two vertical lines are for pausing the debugging, the two cycled lines are for restart the debug, the $>$ is for show the current line, the right arrow is for step into a function in that line, the down arrow is for pass to the next line, and the up arrow is for stepping out of a function to the previous call.
+
+\subsection{Common C mistakes}
+
+\subsubsection{Missplacing a semicolon}
+
+For example: 
+
+\textbf{if (j == 100);}
+
+\textbf{j = 0;}
+
+There are usually committed in loops and ifs, putting a semicolon after the if, while, for, etc. In the above example, the value of j will be always set to 0 due to the misplaced semicolon after the closing parenthesis. Semicolon is syntactically valid (it represents the null statement) and therefore no error is produced by the compiler.
+
+\subsubsection{Confusing the = operator with the == operator}
+
+They are usually made inside an if, while or do statement. This is perfectly valid, assigning the value at the right to the variable at the left, but it will not do what you want, it will always be a true condition since you are assigning it. Example:
+
+\textbf{if (a = 2)}
+
+\textbf{printf("Your turn $\backslash$n)}
+
+It will always print the statement, since you are assingning the value 2 to the variable a.
+
+\subsubsection{Omitting prototype declarations}
+
+\textbf{result = squareRoot(2);}
+
+If squareRoot is defined later in the programme or in another file and is not explicitly declared otherwise, the compiler assumes that functions return an int. Therefore, it is always safest to include a prototype declaration for all functions that you call (explicitly yourself or implicitly by including the correct header file in your programme.
+
+\subsubsection{Failing to include the header file that includes the definition of a function}
+
+\textbf{double answer = sqrt(value1);}
+
+If this programme does not include the math.h header file, it will generate an error since sqrt() is undefined.
+
+\subsubsection{Confusing a character constant and a character string}
+
+\textbf{text = 'a';}
+
+assigns a single character to text, while
+
+\textbf{text = "a";}
+
+assigns a pointer to the character string a to text.
+
+In the first case, text is normally declared to be a char variable, while in the second it should be declared to be of type pointer to char.
+
+\subsubsection{Using the wrong bound for an array}
+
+\textbf{int a[100], i, sum = 0;}
+
+\textbf{for (i = 1, i$<$=100, ++i);}
+
+\textbf{sum += a[i];}
+
+This code will return an error, since the valid subscripts of an array range from 0 to the number of elements minus one. The preceding loop is incorrect because the last valid subscript of a is 99 and not 100. Also, probably intended to start with the first element of the array, therefore i should be initially set to 0. When i = 100, there will be bound error.
+
+A similar mistake is forgetting to reserve an extra location in an array for the terminating null character of a string. When declaring character arrays, they need to be large enough to contain the terminating null character. The character string hello would require six locations in a character array if you wanted to store a null at the end.
+
+\subsubsection{Confusing the operator -$>$ with the operator . when referencing structure members}
+
+The operator . is used for structure variables and -$>$ is used for structure pointer variables.
+
+\subsubsection{Omitting the ampersand before nonpointer variables in a scanf() call}
+
+\textbf{int number;}
+
+\textbf{scanf("\%i", number);}
+
+All arguments that appear after the format string in a \textbf{scanf()} call must be pointers. The ampersand \# indicates that the input is the pointer that points to the variable that follows, in the case of the above example, to number.
+
+\subsubsection{Using a pointer variable before it is initialised}
+
+\textbf{char *char\_pointer;}
+
+\textbf{*char\_pointer = 'X';}
+
+You can only apply the indirection operation * to a pointer variable after setting the variable point somewhere. char\_pointer is never set pointing to anything, so the assignment is not meaningful.
+
+\subsubsection{Omitting the break statement at the end of a case in a switch}
+
+If a break is not included at the end of a case, then execution continues into the next case.
+
+\subsubsection{Inserting a semicolon at the end of a preprocessor definition}
+
+Usually happens because it becomes a matter of habit to end all statements with semicolons.
+
+\textbf{\#define END\_OF\_DATA 999;}
+
+leads to a syntax error if used in an expression such as 
+
+\textbf{if value == END\_OF\_DATA}
+
+because the compiler will se this statement after preprocessing
+
+\textbf{if value == 999;}
+
+\subsubsection{Omitting a closing parenthesis or quatoation mark in an statement}
+
+The use of embedded parentheses to separate each portion of an equation makes for a more readable line of code. However, there is always the possibility of missing a closing parenthesis or adding one too many. Closing a quotation mark for a string may also cause errors in functions such as \textbf{printf()}.
+
+Both of these will generate a compiler error, but sometimes the error will be identified as coming on a different line, depending on whether the compiler uses a parenthesis or quotation mark on a subsequent line to complete the expression which moves the missing character to a place later in the programme.
+
+\subsection{Understanding compiler errors}
+
+Sometimes the compiler errors and warning are deceiving or you cannot understand what is trying to tell you. You need to understand compiler errors in order to fix them.
+
+The compiler makes decisions about how to translate the code that the programmer has not written in the code. Is convenient because the programmes can be written more succinctly (only expert programmers take advantage of this feature). You should use an option for the compiler to notify all cases where there are implicit decisions, this option is -Wall, which is activated by default in CodeLine.
+
+The compiler shows two types of problems:
+\begin{itemize}
+    \item \textbf{Errors:} A condition that prevents the creation of a final program. No executable is obtained until the errors have been corrected. The first errors are the most reliable because the translation is finished but there are some errors that may derive from the previous ones. Fix the first errors and then compile again to see if other errors also disappear.
+    \item \textbf{Warning:} Messages that the compiler shows about special situations in which an anomaly has been detected but fatal errors have not been found. The final executable programme may be obtained with any number of warnings, but is recommendable to eliminate all to not cause any problems in the future.
+\end{itemize}
+
+Compile always under the -Wall option and do not consider the programme correct until all warnings have been eliminated.
+
+\subsubsection{Variable undeclared (first use in the function)}
+
+This is one of the most common and easier warnings to detect. The symbol shown at the beginning of the message is used, but has not been declared.
+
+\subsubsection{Implicit declaration of function}
+
+This warning appears when the compiler finds a function used in the code, but no previous information has been given about it. You need to declare a function prototype.
+
+\subsubsection{Control reaches end of non-void function}
+
+This warning appears when a function has been defined as returning a result but no return statement has been included to return this result. Either the function is incorrectly defined or the statement is missing.
+
+\subsubsection{Unused variable}
+
+This warning is printed by the compiler when a variable is declared but is not used in the code. The message disappears if the declaration is removed.
+
+\subsubsection{Undefined reference to}
+
+Appears when there is a function invoked in the code that has not been defined anywhere. The compiler tells us that there is a reference to a function with no definition. Check which function is missing and make sure that its definition is compiled.
+
+\subsubsection{Conflicting types for}
+
+Two definitions of a function prototype have been found. One is the prototype of the function, and the other is the definition with the function body. The information in both places is not identical and a conflict has been detected. The compiler shows in which line the conflict appears and the previous definition that caused the contradiction.
+
+\subsubsection{Runtime errors}
+
+The execution of C programmes may terminate abruptly (crash) when a run-time error is detected. C programmes only print the succinct message Segmentation fault. Usually results in a core file, depending on the signal that has been thrown). You can analyse the core file and the call stack to find the cause.
+
+\subsubsection{Others}
+
+If you do not know the cause of an error and you cannot understand the compiler message, a useful way to know the cause of an error is to Google it.
+
+\section{Pointer basics}
+
+\subsection{Overview}
+
+Pointers are very similar to the concept of indirection in real life. Suppose that you need to buy a new ink cartridge for your printer. All purchases are handled by the purchasing department, so you call Joe in purchasing and ask him to order it for you. Joe then calls the local supply store to order the cartridge. You are not ordering the cartridge directly for the supply store yourself (indirection).
+
+In programming, indirection is the ability to reference something using a name, reference, or container instead of the value itself. As example is variable names, you do not use the value of the memory address directly, you call a variable that references it.
+
+The most common form of indirection is the act of manipulating a value through its memory address. A pointer provides an indirect means of accessing the value of a particular data item. A pointer is a variable whose value is a memory address. Its value is the address of another location in memory that can contain a value.
+
+There are good reasons why it makes sense to use pointers in C. They are one of the most powerful tools available in the C language, but also one of the most confusing concepts of C. The compiler must know the type of data stored in the variable to which it points.  You need to know how much memory is occupied or how to handle the contents of the memory to which it points. Each pointer will be associated with a specific type of variable. It can be used only to point to a variable of that type: a pointer of type pointer to int can point only to variables of type int, and a pointer of type pointer to float can point only to variables of type float.
+
+Why use pointers in C? Firstly, accessing data by means of only variables is very limiting, with pointers you can access any location (you can treat any position of memory as a variable) and perform arithmetic with pointers. Pointers in C make it easier to use arrays and strings. Besides, pointers allow to refer to the same space in memory form multiple locations. This means that you can update memory in one location and the change can be seen from another location in your programme, which can also save space by being able to share components in your data structures. Furthermore, pointers allow functions to modify data passed to them as variables, which is called pass by reference: passing arguments to function in a way they can be changed by function, this change being reflected outside the function, which means that the use of global variables can be eliminated. Finally, pointers can also be used to optimise a programme to run faster or use less memory.
+
+Pointers allow to get multiple values from the function. A function can return only one value, but by passing arguments as pointers we can get more than one value from the pointer. With pointers, dynamic memory can be created according to the programme use, saving memory from static (compile time) declarations. Pointers allow to design and develop complex data structures like a stack, queue or linked list. Pointers provide direct memory access, which is very efficient.
+
+\subsection{Defining pointers}
+
+A pointer is a variable that points to a memory address or contains a memory address as its value.
+
+Pointers are not declared as normal variables. It is not enough to say that a variable is a pointer, you have to specify the kind of variable to which the pointer points. Different types of variables take up different amounts of storage. Some pointer operations require knowledge of that storage size.
+
+You need to use an asterisk to define a variable:
+
+\textbf{int *pnumber;}
+
+declares a pointer that points to a memory address in which there is a variable of type int. The type of the variable with the name pnumber is int*, and it can store the address of any variable of type int. \textbf{char *pc} defines a pointer to a character variable, \textbf{float *pf, *pg} defines two pointers to float variables.
+
+You can leave a space between the asterisk and the pointer name but is optional. Programmers usually use the space in a declaration and omit it when dereferencing a variable.
+
+The value of a pointer is an address, represented internally as aun unsigned integer on most systems. You should not think of a pointer as an integer type, things you can do with integers you cannot do with pointers, and vice versa, for example, you can multiply one integer by another, bout you cannot multiply one pointer by another.
+
+A pointer is a new type of variable, not an integer type. The format specifier for pointers is \%p.
+
+The previous declarations creates the variable but does not initialise it. A pointer is dangerous when not initialised, so you should always initialise a pointer when you declare it.
+
+You can initialise a pointer so that it does not point to anything:
+
+\textbf{int *pnumber = NULL;}
+
+NULL is a constant defined in the standard library. Is the equivalent of zero for a pointer, is a value that is guaranteed not to point to any location in memory. This means that it implicitly prevents accidental memory overwriting by using a pointer that does not point to anything specific. To use NULL, you should add an include directive for stddef.h to your source file.
+
+If you want to initialise your variable with the address of a variable you have already declared, you use the operator \&, just like in the \textbf{scanf()} function (logical, since this function uses pointers as arguments). Example:
+
+\textbf{int number = 99;}
+
+\textbf{int *pnumber = \&number;}
+
+This makes that the initial value of pnumber is the address of the variable number. Declaration of number must precede the declaration of the pointer that stores its address. The compiler must already have an allocated space and thus an address for number to use it to initialise pnumber.
+
+Be careful, there is nothing special about the declaration of a pointer, you can declare regular variables and pointers in the same statement. Example:
+
+\textbf{int *p, q;}
+
+The above declares a pointer p of type *int and a variable q of type int. A common mistake is to think that both p and q are pointers. It is a good idea to use names beginning with p as pointer names, to be easily identified.
+
+\subsection{Accessing pointers}
+
+Accessing a pointer is to access the value of the address that the pointer contains. For that, you use the indirection operator *, also referred to as the dereference operator because you use it to dereference a pointer.
+
+The pointer variable contains the address of the variable number. For example:
+
+\textbf{int number = 15;}
+
+\textbf{int *pointer = \&number;}
+
+\textbf{int result = 0;}
+
+\textbf{result = *pointer + 5;}
+
+*pointer would evaluate to the value stored at the address contained in the pointer, 15 so result would be 15 + 5 = 20. 
+
+The * is also the symbol for multiplication. Depending on whether the asterisk appears, the compiler will interpret it as an indirection operator, as a multiplication sign, or as part of a type specification. The context determines what it means in any instance.
+
+To output the address of a variable, use the output format specifier \%p. This will output a pointer value as a memory address in hexadecimal form.
+
+Pointers occupy 8 bits and the addresses have 16 hexadecimal digits. If a machine is 64 bits, the pointer will be represented as a 64-bit value and if only occupies 32 bits, there will be displayed by 32 bits.
+
+Remember, a pointer itself has an address, just like any other variable, so the \%p is the conversion specifier to display an address. You use the \& operator ot referende the address that a variable occupies. You can use (void*) to prevent a possible warning from the compiler, because the \%p spacification expects the value to be some kind of pointer type, but the type of \&pnumber is pointer to pointer to int:
+
+\textbf{printf("pnumber address is \%p$\backslash$n", (void*)\&pnumber);}
+
+You use the sizeof operator to obtain the number of bytes a pointer occupies. You may get a compiler warning when using sizeof this way, since is an implementation-defined integer type. To prevent it, you could cast the argument to ypt int like this:
+
+\textbf{printf("pnumber size: \%d bytes $\backslash$n", (int)sizeof(pnumber));}
+
+\subsection{Challenge Pointer Basics}
+
+Write a programme that creates an integer variable with a hard coded value. Assign that variable address to a pointer address. Display as output the address of the pointer, the value of the pointer and the value of what the pointer is pointing to.
+
+The solution to the challenge is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//12_Pointer_Basics/Pointer basics challenge.png}
+    \caption{Pointer basics challenge solution}
+    \label{fig:pointer_basics_challenge_solution}
+\end{figure}
+
+\section{Utilising pointers}
+
+\subsection{Overview}
+
+C offers several basic operations you can perform on pointers: assigning an address to  a pointer (\& operator), dereferencing (* operator), take a pointer address (\&) and perform pointer arithmetic (see following Section).
+
+You can also find the difference between two pointers, you do this for two pointers to elements that are in the same array to find out how far apart the elements are. You can use the relational operators to compare the values of two pointers of the same type. There are two types of addition and subtraction: you can add (or subtract) a pointer to another to get an integer or add an integer to a pointer and get a pointer.
+
+Be careful when incrementing or decrementing pointers and causing an array out-of-bounds error. The computer does not keep track of whether a pointer still points to an array element.
+
+The value referenced by a pointer can be used in an arithmetic expression. If a variable is defined to be pointer to integer then it is evaluated using the rules of integer arithmetic.
+
+Example: \textbf{pnumber = \&number; *pnumber += 25;} increments the value of the number variable by 25. * indicates that you are accessing the contents to which the variable pnumber is pointing to.
+
+If a pointer points to a variable x, that pointer has been defined to be a pointer to the same data type as is x. The use of *pointer in an expression is identical to the use of x in the same expression.
+
+A variable defined as pointer to int can store the address of any variable of type int. A pointer can contain the address of any variable of the appropiate type, so you can use one pointer variable to change the values of many different variables as long as they are of a type compatible with the pointer type.
+
+When we have used \textbf{scanf()} to input values, we have used \& operator to obtain the address of a variable that is to store the input (second argument). When you have a pointer that already contains an address, you can use the pointer name as an argument for \textbf{scanf()}. Example:
+
+\textbf{int *pvalue = \& value;}
+
+\textbf{scanf("\%d", pvalue)}
+
+There is one very important rule: do not dereference a uninitialised pointer.
+
+\textbf{int *pt} // an unitialised pointer
+
+\textbf{*pt = 5} // a terrible error
+
+Second line means that the value 5 should be stores in the location to which pt points. pt has a random value, there is no knowing where the 5 will be placed. It might go somewhere harmless, it might overwrite data or code or it might cause the programme to crash. 
+
+Creating a pointer only allocates memory to store the pointer itself, not to store data. Before using a pointer, it should be assigned to memory location: you must assign the address of an existing variable to the pointer, or you can use the \textbf{malloc()} function to allocate memory first.
+
+When declaring a pointer that does not point to anything, it must be initialised to NULL, the equivalent to 0 for pointers. Because of this, if you want to test whether a pointer is NULL you can do this: \textbf{if(!pvalue)} or you can do it explicitly by using == NULL.
+
+You want to check for NULL before dereference a pointer, often when pointers are passed to functions.
+
+\subsection{Pointers and const}
+
+When we use the const modifier on a variable or an array it tells the compiler that the contents of the variable/array will not be changed by the programme.
+
+With pointers, there are two things to consider when using the const modifier: whether the pointer will be changed and whether the value that the pointer points will be changed.
+
+You can use the const keyword when you declare a pointer to indicate that the value pointed to must not be changed. Example:
+
+\textbf{long value = 9999L;}
+
+\textbf{const long *pvalue = \&value;} // defines a pointer to a constant
+
+This last statement declares the value pointed to by pvalue to be const. The compiler will check for any statements that attempt to modify the value pointed to by pvalue and flag such statements as an error. You can still modify the variable value (you have only applied const to the pointer). You could change value: \textbf{value = 7777L} would not result in an error.
+
+The pointer itself is not constant, so you can still change what it points to:
+
+\textbf{long number = 8888L;}
+
+\textbf{pvalue = \&number;} // Changes the address in pvalue
+
+This will change the address stored in pvalue to point to number. You still cannot use the pointer to change the value that is stored, but you can change the address stored in the pointer as much as you like. Using the pointer to change the value pointed to is not allowed, even after you have changed the address stored in the pointer.
+
+You might also want to ensure that the address stored in a pointer cannot be changed. You can do this by using the const keyword in the declaration of the pointer:
+
+\textbf{int count = 43;}
+
+\textbf{int *const pcount = \&count;} // Defines a constant pointer
+
+The above ensures that a pointer always points to the same thing, indicating that the address sotred must not be changed. Compiler will check that you do not try to chagne what the pointer points elsewhere in your code. You can still change the value that pcount points to: \textbf{*pcount = 345;} will be correct.
+
+You can create a constant pointer that points to a value that is also constant:
+
+\textbf{int item = 25;}
+
+\textbf{const int *const pitem = \&item}
+
+pitem is a constant pointer to a constant so everything is fixed: you cannot change the address stored in pitem nor use pitem to modify what it points to. You can still change the value of item directly, if you want to make everything not change, you could specify item as const as well.
+
+\subsection{Void pointers}
+
+The type void means absence of any type. A pointer of type void* can contain the address of a data item of any type. Void* is often used as a parameter type or return value type with functions that deal with data in a type independent way. Any kind of pointer can be passed around as a value of type void*.
+
+The void pointer does not know what type of object it is pointing to, so it cannot be dereferenced directly. The void pointer must first be explicitly cast to another pointer type before being referenced.
+
+The address of a variable of type int can be stores in a pointer variable of type void*. When you want to access the integer value at the address stores in the void* pointer, you must first cast the pointer to type int.
+
+\subsection{Pointers and arrays}
+
+An array is a collection of objects of the same type that you can refer to using a single name. 
+
+You can use a pointer to hold the address of different variables of the same type at different times.
+
+Array and pointers seem quite different, but they are very closely related and can sometimes be used interchangeably. One of the most common uses of pointers in C is as pointers to arrays. The main reasons for using pointers to arrays are notational convenience and programme efficiency. Pointers to arrays generally result in code that uses less memory and executes faster.
+
+If you have an array of 100 integers:
+
+\textbf{int values[100];}
+
+You can define a pointer to access the integers contained in the array.
+
+\textbf{int *valuesPtr;}
+
+When you define a pointer to point the elements of an array, you do not designate the pointer as type pointer to array, you designate it to the type of element that is contained in the array.
+
+To set valuesPtr to the first element in the values array you write:
+
+\textbf{valuesPtr = values;}
+
+The address operator is not used, the C compiler treats the appearance of an array name without a subscrip as a pointer to the array. Specifying values without a subscript has the effect of producing a pointer to the first element of values.
+
+An equivalent way of producing a pointer to the start of values is to apply the address operator to the first element of the array:
+
+\textbf{valuesPtr = \&values[0];}
+
+Either one is fine and is a matter of programmer preference.
+
+The two expressions \textbf{ar[i]} and \textbf{*(ar+i)} are equivalent in meaning. Both work if ar is the name of an array and if ar is a pointer variable. Using an expression such as ar++ only works if ar is a pointer variable.
+
+\subsection{Passing pointers to a function}
+
+There are a few different ways you can pass data to a function: by value or by reference. C passes it by value, but it simulates pass by reference using address.
+
+Pass by value is when a function copies the actual value of an argument into the formal parameter of the function.  Changes made to the parameter inside the function have no effect on the argument. C uses pass by value, so the code within a function cannot alter the arguments used to call it.
+
+You can pass a pointer as an argument to a function and you can also have a function return a pointer as its result. 
+
+Pass by reference copies the address of an argument into the formal parameter. The address is used to access the actual argument used in the call and the changes made to the parameter affect the passed argument.
+
+To pass a value by reference, argument pointers are passed to the functions just like any other value. You need to declare the function parameters as pointer types. Changes inside the function will be reflected outside the function as well, unlike calls by value.
+
+You can communicate two kinds of information to a function: the value of x and the function must be declared with the same type as x:
+
+\textbf{function1(x);}
+
+\textbf{int function1(int num)}
+
+Or you can transmit the address of x and requires the function definition to include a pointer to the correct type:
+
+\textbf{function2(\&x);}
+
+\textbf{int function2(int *ptr)}
+
+You can qualify a function parameter using the const keyword. Indicates that the function will treat the argument that is passed for this parameter as a constant. It is only useful when the parameter is a pointer. You apply the const keyword to a parameter that is a pointer to specify that the function will not change the value to which the argument points. Example:
+
+\textbf{bool SendMessage(const char* pmessage)}
+
+The type of parameter, pmessage, is a pointer to a const char. It is the char value that is constant, not its address. You could specify the pointer itself as const too, but this makes little sense because the address is passed by value. You cannot change the original pointer in the calling function. 
+
+The compiler knows that an argument that is a pointer to constant data will be safe. If you pass a pointer to constant data as an argument for a parameter, then the parameter must be used like in the above.
+
+Returning a pointer from a function is a particularly powerful capability. It provides a way for you to return not just a single value, but a whole set of values.
+
+You would have to declare a function returning a pointer:
+
+\textbf{int* myFunction()}
+
+Be careful, there are specific hazards related to returning a pointer. Use local variables to avoid interfering with the variable that the arguments points to.
+
+\subsection{Challenge Pointers as parameters}
+
+This challenge is focussed to learn how to pass by reference. Write a function that squares a number by itself. The function should define as a parameter an int pointer.
+
+The solution is:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//13_Utilising_pointers/PointersAsParametersSolution.png}
+    \caption{Pointers as Parameters challenge solution}
+    \label{fig:pointers_as_parameters_challenge_solution}
+\end{figure}
+
+\section{Pointer arithmetic}
+
+\subsection{Overview}
+
+The real power of using pointers to arrays comes into play when you want to sequence through the elements of an array. A pointer can be used to access the first value of an array. To reference values[3] from a pointer that points to values[0], you can add 3 to the pointer (valuesPtr, for example) and the apply the indirection operator: \textbf{*(valuesPtr + 3)}. Generally, the expression *(valuePtr + i) can be used to access the value contained in values[i].
+
+To set valuesPtr to point to the second element of the values array, you can apply the address operator to values[1] and assign the result to valuesPtr:
+
+\textbf{valuesPtr = \&values[1]}
+
+Or, if valuesPtr points to values[0], you can set it to point to values[1] by simply adding 1 to the value of valuesPtr:
+
+\textbf{valuesPtr += 1;}
+
+This is a perfectly valid expression in C and can be used for pointers to any data type.
+
+The increment and decrement operators ++ and -- are particularly useful, the increment operator has the same effect as adding one to the pointer:
+
+\textbf{++valuesPtr}
+
+sets valuesPtr pointing to the next position in values array (values[1]), while
+
+\textbf{--valuesPtr}
+
+sets valuesPtr pointing to the previous position, assuming that valuesPtr was not pointing to the beginning of the values array.
+
+To pass an array to a function, you simply specify the name of the array. To prodecue a pointer to an array, you need only specify the name of the array. This explains why you are able to change the elements of an array from within a function. The array can be declared to be a pointer. If you are going to be using index numbers to reference the elements of an array that is passed to a function, declare the corresponding formal parameter to be an array, this reflects more correctly the use of the array by the function. If you are using the argument as a pointer to the array, declare it to be of type pointer.
+
+Applying ++ or -- to an array is not correct. Also, you cannot multiply arrays or sum pointers directions.
+
+Functions that process arrays actually use pointers as arguments. You have a choice between array notation and pointer notation for writing array-processing functions. Using array notation makes it more obvious that the function is working with arrays. Other programmers might be more accustomed to working with pointers and find the pointer notation more natural. It is closer to machine language and, with some compilers, leads to more efficient code.
+
+\subsection{Pointers and arrays example}
+
+In PointersArraysExample there is another example of the relation between pointers and arrays.
+
+\subsection{Pointers and strigs}
+
+One of the most common applications of using a pointer to an array is as a pointer to a character string because of notational convenience and efficiency. Using a variable of type pointer to char to reference a string gives you a lot of flexibility.
+
+If you have an array of characters called text, you could similarly define a pointer to be used to point to elements in text:
+
+\textbf{char *textPtr;}
+
+If textPtr is set pointing to the beginning of an array of chars called text, \textbf{++textPtr;} sets textPtr pointing to the next character in text, text [1]. \textbf{--textPtr} sets textPtr pointing to the previous character in text, assuming that textPtr was not pointin to the beginning of text.
+
+\subsection{Challenge Counting string characters}
+
+Write a function that calculates the length of a string. It should take as parameter a const char pointer, it can only determine the length using pointer arithmetic (incrementation operator ++pointer). You are required to use a while loop using the value of the pointer to exit. The function should subtract two pointers, one pointing to the end of the string and one pointing to the beginning of the string. The function should return an int that is the length of the string passed into the function.
+
+The solution is:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figures//14_Pointer_Arithmetic/CountingStringChallenge.png}
+    \caption{Counting string characters challenge solution}
+    \label{fig:counting_string_solution}
+\end{figure}
